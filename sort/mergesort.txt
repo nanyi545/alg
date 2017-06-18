@@ -1,0 +1,65 @@
+public class MergeSort {
+
+    @Test
+    public void test(){
+        int[] arr=new int[]{1,7,5,7,2,4,6,8 ,56,12,345,223,12344,55,2,4,6,7,7};
+        mergeSort(arr,0,arr.length-1);
+        System.out.println(getArr(arr));
+    }
+
+    private static String getArr(int[] arr){
+        StringBuilder sb=new StringBuilder();
+        for (int tmp:arr){
+            sb.append(","+tmp);
+        }
+        return sb.toString();
+    }
+
+    /**
+     *
+     * @param arr
+     * @param startInd
+     * @param endInd
+     */
+    public static void mergeSort(int[] arr,int startInd,int endInd){
+        if (startInd<endInd){
+            int midInd=(startInd+endInd)/2;
+            System.out.println("midInd: "+midInd);
+            mergeSort(arr,startInd,midInd);
+            mergeSort(arr,midInd+1,endInd);
+            mergeSortedArr(arr,startInd,midInd,endInd);
+        }
+    }
+
+    /**
+     startIndex   ----  middleIndex
+     middleIndex+1  ----   endIndex
+     **/
+    public static void mergeSortedArr(int[] arr,int startInd,int midInd,int endInd){
+        int l1=midInd-startInd+1;
+        int l2=endInd-(midInd+1)+1;
+        int[] arr1=new int[l1+1];
+        int[] arr2=new int[l2+1];
+        for (int temp=0;temp<l1;temp++){
+            arr1[temp]=arr[startInd+temp];
+        }
+        arr1[l1]=Integer.MAX_VALUE;
+        for (int temp=0;temp<l2;temp++){
+            arr2[temp]=arr[midInd+1+temp];
+        }
+        arr2[l2]=Integer.MAX_VALUE;
+        int c1=0,c2=0;
+        for (int temp=startInd;temp<=endInd;temp++){
+            if (arr1[c1]<arr2[c2]){
+                arr[temp]=arr1[c1];
+                c1+=1;
+            } else{
+                arr[temp]=arr2[c2];
+                c2+=1;
+            }
+        }
+    }
+
+
+
+}
