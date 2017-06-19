@@ -1,0 +1,30 @@
+public class BinaryBoundarySearch {
+
+    @Test
+    public void test(){
+        int[] arr=new int[]{1,7,5,22,34,77,89,123,564,1234,10086};
+        System.out.println(getLowerBound(arr,76));
+        System.out.println(getLowerBound(arr,77));
+        System.out.println(getLowerBound(arr,78));
+    }
+
+    /**
+     *     given a sorted array, and X, find the minimum value in the array that is >= X ,
+     */
+    public static int getLowerBound(int[] arr,int target){
+        int lo=0;
+        int hi=arr.length-1;
+        while((hi-lo)>1){
+            int mid=(hi+lo)/2;
+            if (arr[mid]>=target){
+                hi=mid;
+            } else{
+                lo=mid;
+            }
+        }
+        if (arr[hi]>=target){
+            return arr[hi];
+        } else return -1;
+    }
+
+}

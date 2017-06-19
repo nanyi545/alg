@@ -1,0 +1,27 @@
+public class BinarySearch {
+
+    @Test
+    public void test(){
+        int[] arr=new int[]{1,7,5,22,34,77,89,123,564,1234,10086};
+        System.out.println(search(arr,76));
+        System.out.println(search(arr,77));
+        System.out.println(search(arr,78));
+    }
+
+    public static int search(int[] arr,int target){
+        int lo=0;
+        int hi=arr.length-1;
+        while(hi>lo){
+            int mid=(hi+lo)/2;
+            if (arr[mid]==target) return mid;
+            if (arr[mid]>target){
+                hi=mid-1;
+            }
+            if (arr[mid]<target){
+                lo=mid+1;
+            }
+        }
+        return -1;
+    }
+
+}
