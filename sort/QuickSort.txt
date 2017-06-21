@@ -1,0 +1,70 @@
+public class QuickSort {
+
+    @Test
+    public void test(){
+        int[] arr=new int[]{0,1,5,4,3,2,-2,1};
+        quickSort(arr,0,arr.length-1);
+        System.out.println(Printer.printIntArr(arr));
+    }
+
+    @Test
+    public void test1(){
+        int[] arr=new int[]{0,1,5,4,3,2,-2,1};
+        System.out.println(findKthSmallest(arr,0,arr.length-1,4));
+    }
+
+
+    public static int findKthSmallest(int[] arr,int lo,int hi,int k){
+        if (hi>=lo){    //   hi > lo  could return -1 ....  think about this ...
+            int pivotIndex=regroup(arr,lo,hi);
+            if (k==pivotIndex) return arr[k];
+            if (k<pivotIndex) return findKthSmallest(arr,lo,pivotIndex-1,k);
+            if (k>pivotIndex) return findKthSmallest(arr,pivotIndex+1,hi,k);
+        }
+        return -1;
+    }
+
+
+    public static void quickSort(int[] arr,int lo,int hi){
+        if(hi>lo){
+            int pivotIndex=regroup(arr,lo,hi);
+            quickSort(arr,lo,pivotIndex-1);
+            quickSort(arr,pivotIndex+1,hi);
+        }
+    }
+
+
+    /**
+     *
+     * @return   pivot index
+     *
+     *      lo  ~  ret-1  <=  arr[ret]
+     *      ret+1 ~  hi   >=  arr[ret]
+     */
+    public static int regroup(int[] arr,int lo,int hi){
+        int pivot=arr[hi];
+        int smallerCount=0;
+        for (int i=lo;i<hi;i++){
+            if(arr[i]<=pivot){
+                swap(arr,i,smallerCount+lo);
+                smallerCount+=1;
+            }
+        }
+        swap(arr,hi,smallerCount+lo);
+        return smallerCount+lo;
+    }
+
+
+    public static void swap(int[] arr, int ind1,int ind2){
+        int temp=arr[ind1];
+        arr[ind1]=arr[ind2];
+        arr[ind2]=temp;
+    }
+
+
+
+
+
+
+
+}
