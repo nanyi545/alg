@@ -1,0 +1,67 @@
+package com.alg.weiwang.algorithoms.hash;
+
+/**
+ * Created by Administrator on 2017/6/22.
+ */
+
+import org.junit.Test;
+
+import java.util.HashMap;
+
+public class IsSubArray {
+
+    @Test
+    public void test(){
+        int[] arr1=new int[]{2,3,4,5,6,7};
+        int[] arr2=new int[]{2,3,4,5};  // true
+        System.out.println(isSubArray(arr1,arr2));
+    }
+    @Test
+    public void test2(){
+        int[] arr1=new int[]{2,3,4,5,6,7};
+        int[] arr2=new int[]{2,3,4,5,5};  // false
+        System.out.println(isSubArray(arr1,arr2));
+    }
+
+
+    /**
+     *    duplicates in int arr is allowed ...
+     *
+     *   check if  arr2 is a sub array of arr1
+     *
+     * @param arr1
+     * @param arr2
+     * @return
+     */
+    public boolean isSubArray(int[] arr1,int[] arr2){
+        HashMap<Integer,Integer> counter=new HashMap<>();
+        for (int temp:arr1){      //  keep a map of integer counts in arr1
+            if (counter.containsKey(temp)){
+               int newCount = counter.get(temp) +1;
+                counter.put(temp,newCount);
+            } else {
+                counter.put(temp,1);
+            }
+        }
+        for (int temp:arr2){     //   if integer is also in arr2, -1,
+            if (!counter.containsKey(temp)) {
+                return false;
+            } else {
+                int count=counter.get(temp);
+                count-=1;
+                if (count<0) {
+                    return false;
+                } else {
+                    counter.put(temp,count);
+                }
+
+            }
+        }
+        return true;
+    }
+
+
+
+
+
+}

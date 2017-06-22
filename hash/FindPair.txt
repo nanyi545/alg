@@ -1,0 +1,52 @@
+package com.alg.weiwang.algorithoms.hash;
+
+/**
+ * Created by Administrator on 2017/6/22.
+ */
+import com.alg.weiwang.algorithoms.utils.Printer;
+
+import org.junit.Test;
+
+import java.util.HashMap;
+import java.util.HashSet;
+
+public class FindPair {
+
+    /**
+     *
+     * unsorted !!
+     Given an array A[] and a number x, check for pair in A[] with sum as x
+     */
+
+    @Test
+    public void test(){
+        int[] arr1=new int[]{2,3,4,11,6,7};
+        System.out.println(Printer.printIntArr(findPair(arr1,7)));
+    }
+
+
+    public int[] findPair(int[] arr,int target){
+        int[] ret=new int[2];
+        HashMap<Integer,Integer> map=new HashMap<>();
+        int index=0;
+        for (int temp:arr){
+            map.put(temp,index);
+            index+=1;
+        }
+        for (int offset=0;offset<arr.length;offset++){
+            int complement=target-arr[offset];
+            if (map.containsKey(complement)){
+                ret[0] = offset;
+                ret[1] = map.get(complement);
+                return ret;
+            }
+        }
+        ret[0]=-1;
+        ret[1]=-1;
+        return ret;
+    }
+
+
+
+
+}
