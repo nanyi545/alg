@@ -1,0 +1,46 @@
+package com.alg.weiwang.algorithoms.recursion;
+
+/**
+ * Created by Administrator on 2017/6/22.
+ */
+import com.alg.weiwang.algorithoms.utils.Printer;
+
+import org.junit.Test;
+
+public class Fib {
+
+
+    @Test
+    public void test(){
+    }
+
+
+    /**
+     *   linear recursion to get fibonaci
+     */
+    public int[] fibLinear(int n){
+        if (n==1) {
+            int[] ret=new int[2];
+            ret[0]=1;
+            ret[1]=1;
+            return ret;
+        } else {
+            int[] ret=new int[2];
+            ret[0]=fibLinear(n-1)[1]+fibLinear(n-1)[0];
+            ret[1]=fibLinear(n-1)[1]+ret[0];
+            return ret;
+        }
+    }
+
+
+    /**
+     *
+     */
+    public int fibBinary(int n){
+        if (n==0) return 1;
+        if (n==1) return 1;
+        else return fibBinary(n-1)+fibBinary(n-2);
+    }
+
+
+}
