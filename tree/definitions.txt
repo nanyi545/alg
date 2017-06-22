@@ -1,0 +1,71 @@
+--------- CH7 tree -----------
+
+
+7.1.1 definition 
+* root node : the only node that has no parent
+* siblings  : nodes that are children of the same parent 
+* external  : one that has no children (leaf)
+* internal  : one that has children 
+* ancestor  : u is ancester of v if u=v or u is an ancester of the parent of v 
+* descendent: v is descendent of u 
+* edge      : a parent-child pair 
+* path      : a series of connecting edges 
+* ordered tree: a parent that has method to get child by index(1st 2nd ...)
+
+
+
+7.2 tree traversal
+
+depth: number of ancestors , excluding itself, root has depth: 0 / non-root has depth:  1+depth of parent
+height: for external node:0,  non-external node: 1 + max height of its children  / height of tree is height of root... 
+
+****   Cv: number of cildren of a node v of T.   total of Cv for all positions= n-1  !!!!
+
+7.2.2 preorder traversal : root first 
+f(t,v), visit(v) --> for all children vv of v: f(t,vv)    -->  f(t,t.root())
+
+7.2.3 postorder traversal : root last 
+f(t,v) --> for all children vv of v: f(t,vv) ,visit(v)    -->  f(t,t.root())
+
+
+
+7.3 binary tree 
+* proper binary tree: each node has either 0 or 2 children -->  also called full binary tree
+* complete binary tree --> 2^n-1 nodes , n=height  
+
+application: arrithmatic expression 
+
+ArrayList binary tree:    1 
+                      2       3 
+                    4   5   6   7 
+                   8 9 a b c d d f
+
+  
+7.3.6 binary tree traversal: 
+problem: build tree from arrithmatic expression:  like (1+3)*(5-1)
+S <- new empty stack, [e0 e1 ...ei...en],  if ei is a variable or operator  T <- new tree with ei as root , s.push(T)  / if ei is "("  continure , if ei is ")"   ...   
+
+problem: expression tree evaluation: post-order traversal 
+
+
+* inorder traversal : root in middle 
+f(t,v) -->  v's left child v_left , right child v_right : f(t,v_left) ,visit(v), f(t,v_right)    -->  f(t,t.root())
+problem:  draw a binary tree:  1  x(v) : number of nodes visited before v in the inorder traversal of T
+                               2  y(v) : depth of v in T
+
+* binary search tree :
+** proper:  1 internal node stores an element
+            2 for internal node, element (if there is any)  in left child <=  element in itself <= element (if there is any)  in right child ---> internal node could have 
+
+an external node (which has no element)
+            3 external node does not store such element 
+
+	
+* Euler tour traversal :
+eulerTour(T,v) :
+1 visit v on the left
+2 if v has left child u , eulerTour(T,u)
+3 visit v from below 
+4 if v has right child w, eulerTour(T,w)
+5 visit v on the right 
+
