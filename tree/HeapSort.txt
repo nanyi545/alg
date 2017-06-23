@@ -1,0 +1,110 @@
+package com.alg.weiwang.algorithoms.tree;
+
+/**
+ * Created by Administrator on 2017/6/23.
+ */
+import com.alg.weiwang.algorithoms.utils.Printer;
+
+import org.junit.Test;
+
+public class HeapSort {
+
+    @Test
+    public void test(){
+        int[] test=new int[]{3,7,5,9,23,1,23,54,23,12,1,55,7,2,5,345,1};
+        heapSort(test);
+        Printer.printIntArr(test);
+    }
+
+
+    void heapSort(int[] arr){
+        buildMaxHeap(arr);
+        for(int i=0;i<arr.length-1;i++){
+            swap(arr,0,arr.length-1-i);
+            heapify(arr,0,i+1);
+        }
+    }
+
+    void buildMaxHeap(int[] arr){
+        int lastNonLeaf=getParent(arr.length-1);
+        for (int i=lastNonLeaf;i>=0;i--){
+            heapify(arr,i,0);
+        }
+    }
+
+
+    /**
+     *    this is down-ward bubble action
+     *
+     * @param root
+     * @param excludeLast   the last N elements in the array should not shift
+     */
+    void heapify(int[] arr,int root,int excludeLast){
+        int maxSize=arr.length-excludeLast;
+        if (root<maxSize){
+            int left=getLeft(root);
+            int right=getRight(root);
+            int maxIndex=root;
+            if (left<maxSize){
+                if(arr[left]>=arr[maxIndex])
+                    maxIndex=left;
+            }
+            if(right<maxSize){
+                if(arr[right]>=arr[maxIndex])
+                    maxIndex=right;
+            }
+            if (maxIndex!=root){
+                swap(arr,root,maxIndex);
+                heapify(arr,maxIndex,excludeLast);
+            }
+        }
+    }
+
+
+
+    /**
+     *
+     *   max heap : the keys of parent nodes are always greater than or equal to those of the children and the highest key is in the root node.
+     *   min heap : the keys of parent nodes are less than or equal to those of the children and the lowest key is in the root node.
+     *
+     *  a complete binary tree;  that is, all levels of the tree, except possibly the last one (deepest) are fully filled, and,
+     *  if the last level of the tree is not complete, the nodes of that level are filled from left to right.
+     *
+     *  array representation of heap
+     *
+     */
+
+
+
+    /**
+     *               0
+     *           1       2
+     *         3   4   5   6
+     *        7....
+     */
+    int getLeft(int ind){
+        return ind*2+1;
+    }
+    int getRight(int ind){
+        return ind*2+2;
+    }
+    int getParent(int ind){
+        int residue=ind%2;
+        if (residue==0) return ind/2-1;
+        else return ind/2;
+    }
+    boolean isRoot(int ind){
+        return ind==0;
+    }
+
+
+
+    void swap(int[] arr,int ind1,int ind2){
+        int temp=arr[ind1];
+        arr[ind1]=arr[ind2];
+        arr[ind2]=temp;
+    }
+
+
+
+}

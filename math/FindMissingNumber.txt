@@ -1,0 +1,37 @@
+package com.alg.weiwang.algorithoms.math;
+
+/**
+ * Created by Administrator on 2017/6/23.
+ */
+
+public class FindMissingNumber {
+
+
+/**
+ *
+ *
+
+
+ https://stackoverflow.com/questions/3492302/easy-interview-question-got-harder-given-numbers-1-100-find-the-missing-numbe?rq=1
+
+
+ Q1: We have a bag containing numbers 1, 2, 3, …, 100. Each number appears exactly once, so there are 100 numbers. Now one number is randomly picked out of the bag. Find the missing number.
+ Q2: That is correct, but now how would you do this if TWO numbers are missing?
+ Qk: If exactly k numbers are missing from the bag, how would you find it efficiently?
+
+ Remember sum of i-th powers, where i=1,2,..,k. This reduces the problem to solving the system of equations
+
+ a1 + a2 + ... + ak = b1
+
+ a1^2 + a2^2 + ... + ak^2 = b2
+
+ ...
+
+ a1^k + a2^k + ... + ak^k = bk
+
+ *
+ */
+
+
+
+}
