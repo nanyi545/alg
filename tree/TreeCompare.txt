@@ -1,0 +1,67 @@
+package com.alg.weiwang.algorithoms.tree;
+
+/**
+ * Created by Administrator on 2017/6/26.
+ */
+
+public class TreeCompare {
+
+
+    /**
+
+     ******************   1   BST **********************************
+
+     defined as follows:
+
+     The left subtree of a node contains only nodes with keys less than the node's key. The right subtree of a node contains only nodes with keys greater than the node's key. Both the left and right subtrees must also be binary search trees
+
+             20
+           /  \
+         10    30
+       /  \
+     5    40
+
+     In the tree above, each node meets the condition that the node contains a value larger than its left child and smaller than its right child hold, and yet it is not a BST: the value 5 is on the right subtree of the node containing 20, a violation of the BST property.
+     -----------------------------------------------------------
+     in-order traversal  -->  should be sorted
+
+     -----------------------------------------------------------
+     * binary search tree :
+     ** proper:
+     1 internal node stores an element
+     2 for internal node, element (if there is any)  in left child <=  element in itself <= element (if there is any)  in right child ---> internal node could have
+     an external node (which has no element)
+     3 external node does not store such element
+     ---------------------------------------------------------------
+     https://en.wikipedia.org/wiki/Binary_search_tree
+
+     Algorithm	Average		Worst Case
+     Space		O(n)		O(n)
+     Search		O(log n)	O(n)
+     Insert		O(log n)	O(n)
+     Delete		O(log n)	O(n)
+
+
+     This is much better than the linear time required to find items by key in an (unsorted) array, but slower than the corresponding operations on hash tables.
+     ---------------------------------------------------------------
+
+     ****************** 2  binary heap **********************************
+
+     A binary heap is defined as a binary tree with two additional constraints:[3]
+
+     Shape property: a binary heap is a complete binary tree;  ---> all levels of the tree, except possibly the last one (deepest) are fully filled, and, if the last level of the tree is not complete, the nodes of that level are filled from left to right.
+     Heap property: the key stored in each node is either greater than or equal to (≥) or less than or equal to (≤) the keys in the node's children, according to some total order.
+
+     In a max heap --> the keys of parent nodes are always greater than or equal to those of the children --> the highest key is in the root node.
+     In a min heap --> the keys of parent nodes are less than or equal to those of the children                    -->the lowest key is in the root node.)
+
+
+     ******************  3 full binary tree/proper binary tree **********************************
+
+     proper binary tree: each node has either 0 or 2 children -->  also called full binary tree
+     *
+     */
+
+
+
+}

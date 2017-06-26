@@ -1,0 +1,81 @@
+package com.alg.weiwang.algorithoms.tree;
+
+/**
+ * Created by Administrator on 2017/6/26.
+ */
+
+public class PriorityQueueBasics {
+
+    /**
+
+     --------- ch8 priority queue -----------  (expose no notion of "position" to user) / ordered map?
+
+     8.1.1 total order relation : comparison of Keys
+     1 reflective : k<=k
+     2 anti-symmetric : if k1<=k2 and k2<=k1, then k1=k2
+     3 transitive property : if k1<=k2 and k2<=k3, then k1<=k3
+
+     8.1.2
+     entry : key-value pair ---> an example of "composition pattern" : an object is composed of other objects
+
+     public interface Entry<K,V>{
+     public K getKey(); 	public V getValue();
+     }
+
+     compare keys : " comparator pattern "    --> it is better to use a !!! separte Comparator class than to let the keys implement the Comparable interface
+
+
+     8.1.3 priority queue ADT   (allowed to have the same key)
+
+     size() / isEmpty() / min() / insert(k,x) / removeMin()
+
+
+     8.2 list(linked) implementation
+     size() / isEmpty() / min() / insert(k,x) / removeMin()       sort by add all and then removeMin()  (priority queue sort)
+     sorted list       o(1)     o(1)       o(1)      o(n)           o(1)                -->  insertion sort
+     unsorted list     o(1)     o(1)       o(n)      o(1)           o(n)                -->  selection sort
+     heap(8.3.2)       o(1)     o(1)       o(1)    o(log(n))      o(log(n))             -->  heap sort
+
+
+     8.3 Heap (is a complete binary tree)
+
+     heap order : for every node v, the key at v >=  key at v's parent
+     root: top of the heap ( smallest key )
+
+     tree level i: all nodes that have depth i
+     v is to the left of w :  (v,w on the same level) such that there exists some node u, v is on the left sub tree of node u, w on the right sub tree of u
+
+     complete binary tree:
+     1 tree has height h, 0...h-1 levels are all filled (level i has 2^i nodes)
+     2 on level h, all internal nodes are on the left of the external nodes , there is at most one node with one child (which must be a left child)
+
+     last node : right-most, deepest external node.
+
+     --------------------------------------------------
+     A Binary Heap is a Complete Binary Tree where items are stored in a special order such that value in a parent node is greater(or smaller) than the values in its two
+
+     children nodes. The former is called as max heap and the latter is called min heap. The heap can be represented by binary tree or array.
+     --------------------------------------------------
+
+
+     8.3.2 Heap ADT ( has all methods in binary tree ADT )
+     plus add/remove the last node:   add(o) / remove()
+
+
+     8.3.3 priority queue with heap
+
+     add(o)  -->  1. add a new node u, so that u is the last node, add element o to the last node
+     2. do up-heap bubbling on the last node (u)
+     remove()-->  1. remove root element -->  remove the last node, place its element to the root node.
+     2. do down-heap bubbling on the root node
+
+
+     8.4 adaptable priority queue ( has all methods in priority queue ADT 8.3.3 )
+     plus :   remove(e)          : remove entry e
+     replace(e,k)       : replace the key of entry e with k
+     replaceValue(e,x)  : replace the value of entry e with x
+
+
+
+     */
+}
