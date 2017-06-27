@@ -1,0 +1,23 @@
+The bitwise & operator performs a bitwise AND operation.
+
+The bitwise ^ operator performs a bitwise exclusive OR operation.
+
+The bitwise | operator performs a bitwise inclusive OR operation.
+
+and
+1&1=1
+1&0=0
+0&1=0
+0&0=0
+
+inclusive OR
+1|1=1
+1|0=1
+0|1=1
+0|0=0
+
+exclusive OR
+1^1=0
+1^0=1
+0^1=1
+0^0=0
