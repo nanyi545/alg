@@ -1,0 +1,53 @@
+{
+	"data": 
+	[
+		{
+			"category_name":"sort_and_search",
+			"category_data":[
+				{
+					"url":"sort/mergesort.txt",
+					"filename":"mergesort",
+					"filentype":"txt"
+				},
+				{
+					"url":"sort/BinarySearch.txt",
+					"filename":"BinarySearch",
+					"filentype":"txt"
+				},
+				{
+					"url":"sort/BinaryBoundarySearch.txt",
+					"filename":"BinaryBoundarySearch",
+					"filentype":"txt"
+				},
+				{
+					"url":"sort/MaximumSubArray.txt",
+					"filename":"MaximumSubArray",
+					"filentype":"txt"
+				},
+				{
+					"url":"sort/QuickSort.txt",
+					"filename":"QuickSort",
+					"filentype":"txt"
+				},
+				{
+					"url":"sort/FindPair.txt",
+					"filename":"FindPair",
+					"filentype":"txt"
+				},
+			]
+		},
+		{
+			"category_name":"stack",
+			"category_data":[
+				{
+					"url":"stack/NextLargerElement",
+					"filename":"NextLargerElement",
+					"filentype":"txt"
+				},
+			]
+		},
+
+
+	]
+}
+
