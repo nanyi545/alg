@@ -25,6 +25,18 @@ public class HeapSort {
         }
     }
 
+
+/**
+*
+
+   total work for buildMaxHeap  ---> O(n)
+   
+        3           --->  3 heapify * 1 
+    2       2       --->  2 heapify * 2 
+  1   1   1   1     --->  1 heapify * 4 
+ 0 0 0 0 0 0 0 0    --->  0 heapify * 8
+
+**/
     void buildMaxHeap(int[] arr){
         int lastNonLeaf=getParent(arr.length-1);
         for (int i=lastNonLeaf;i>=0;i--){
