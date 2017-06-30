@@ -33,7 +33,7 @@
 					"url":"sort/FindPair.txt",
 					"filename":"FindPair",
 					"filentype":"txt"
-				},
+				}
 			]
 		},
 		{
@@ -43,11 +43,8 @@
 					"url":"stack/NextLargerElement",
 					"filename":"NextLargerElement",
 					"filentype":"txt"
-				},
+				}
 			]
-		},
-
-
+		}
 	]
 }
-
