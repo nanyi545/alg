@@ -115,7 +115,61 @@
 					"filentype":"txt"
 				}
 			]
+		},
+		{
+			"category_name":"linked structure",
+			"category_data":[
+				{
+					"url":"linkedstructure/Add2Numbers.txt",
+					"filename":"Add_2Numbers",
+					"filentype":"txt"
+				}
+			]
+		},
+		{
+			"category_name":"recursion",
+			"category_data":[
+				{
+					"url":"recursion/Fib.txt",
+					"filename":"Fib",
+					"filentype":"txt"
+				}
+			]
+		},
+		{
+			"category_name":"math",
+			"category_data":[
+				{
+					"url":"math/FindMissingNumber.txt",
+					"filename":"FindMissingNumber",
+					"filentype":"txt"
+				},
+				{
+					"url":"math/bitwise.txt",
+					"filename":"bitWise",
+					"filentype":"txt"
+				}
+			]
+		},
+		{
+			"category_name":"java",
+			"category_data":[
+				{
+					"url":"java/jvm.txt",
+					"filename":"jvm",
+					"filentype":"txt"
+				},
+				{
+					"url":"java/gc.txt",
+					"filename":"gc",
+					"filentype":"txt"
+				},
+				{
+					"url":"java/leaks.txt",
+					"filename":"leaks",
+					"filentype":"txt"
+				}
+			]
 		}
-
 	]
 }
