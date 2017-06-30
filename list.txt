@@ -45,6 +45,77 @@
 					"filentype":"txt"
 				}
 			]
+		},
+		{
+			"category_name":"hash",
+			"category_data":[
+				{
+					"url":"hash/BSToverHash.txt",
+					"filename":"BSToverHash1",
+					"filentype":"txt"
+				},
+				{
+					"url":"hash/FindPair.txt",
+					"filename":"FindPair",
+					"filentype":"txt"
+				},
+				{
+					"url":"hash/SumOfTarget.txt",
+					"filename":"SumOfTarget",
+					"filentype":"txt"
+				},
+				{
+					"url":"hash/IsSubArray.txt",
+					"filename":"IsSubArray",
+					"filentype":"txt"
+				},
+				{
+					"url":"hash/UnionIntersect.txt",
+					"filename":"UnionIntersect",
+					"filentype":"txt"
+				}
+			]
+		},
+		{
+			"category_name":"tree",
+			"category_data":[
+				{
+					"url":"tree/definitions.txt",
+					"filename":"definitions",
+					"filentype":"txt"
+				},
+				{
+					"url":"tree/TreeCompare.txt",
+					"filename":"TreeCompare",
+					"filentype":"txt"
+				},
+				{
+					"url":"tree/PriorityQueueBasics.txt",
+					"filename":"Priority_Queue_Basics",
+					"filentype":"txt"
+				},
+				{
+					"url":"tree/HeapSort.txt",
+					"filename":"HeapSort",
+					"filentype":"txt"
+				},
+				{
+					"url":"tree/IsBST_LCAinBST.txt",
+					"filename":"valid_BST_AND_LCA_in_BST",
+					"filentype":"txt"
+				},
+				{
+					"url":"tree/LCAinBinaryTree.txt",
+					"filename":"LCAinOrdinaryBinaryTree__DrawBinaryTree",
+					"filentype":"txt"
+				},
+				{
+					"url":"tree/IsFull.txt",
+					"filename":"ValidFull_binary_tree",
+					"filentype":"txt"
+				}
+			]
 		}
+
 	]
 }
