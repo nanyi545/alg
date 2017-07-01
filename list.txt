@@ -11,7 +11,7 @@
 				},
 				{
 					"url":"string_related/longest_substring.txt",
-					"filename":"Longest_Substring",
+					"filename":"LongestSubstring",
 					"filentype":"txt"
 				}
 			]
