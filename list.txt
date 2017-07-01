@@ -163,6 +163,16 @@
 					"url":"math/bitwise.txt",
 					"filename":"bitWise",
 					"filentype":"txt"
+				},
+				{
+					"url":"math/bitshift.txt",
+					"filename":"bitshift",
+					"filentype":"txt"
+				},
+				{
+					"url":"math/MathOverFlow.txt",
+					"filename":"MathOverFlow",
+					"filentype":"txt"
 				}
 			]
 		},
