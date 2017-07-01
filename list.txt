@@ -2,6 +2,21 @@
 	"data": 
 	[
 		{
+			"category_name":"string related",
+			"category_data":[
+				{
+					"url":"string_related/PRN_evaluator.txt",
+					"filename":"PRN_evaluator",
+					"filentype":"txt"
+				},
+				{
+					"url":"string_related/longest_substring.txt",
+					"filename":"Longest_Substring",
+					"filentype":"txt"
+				}
+			]
+		},
+		{
 			"category_name":"sort_and_search",
 			"category_data":[
 				{
