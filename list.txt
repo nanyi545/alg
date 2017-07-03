@@ -110,6 +110,11 @@
 					"filentype":"txt"
 				},
 				{
+					"url":"tree/DynamicMedianByPriorityQueue",
+					"filename":"DynamicMedianByPriorityQueue",
+					"filentype":"txt"
+				},
+				{
 					"url":"tree/HeapSort.txt",
 					"filename":"HeapSort",
 					"filentype":"txt"
@@ -129,6 +134,7 @@
 					"filename":"ValidFull_binary_tree",
 					"filentype":"txt"
 				}
+				
 			]
 		},
 		{
