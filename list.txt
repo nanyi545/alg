@@ -45,6 +45,12 @@
 					"filentype":"txt"
 				},
 				{
+					"url":"sort/StaticMedian",
+					"filename":"StaticMedian",
+					"filentype":"txt"
+				},
+
+				{
 					"url":"sort/FindPair.txt",
 					"filename":"FindPair",
 					"filentype":"txt"
