@@ -64,6 +64,11 @@
 					"url":"stack/NextLargerElement.txt",
 					"filename":"NextLargerElement",
 					"filentype":"txt"
+				},
+				{
+					"url":"stack/pairing.txt",
+					"filename":"pairing",
+					"filentype":"txt"
 				}
 			]
 		},
