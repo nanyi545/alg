@@ -214,7 +214,7 @@
 			]
 		},
 		{
-			"category_name":"ANDROID",
+			"category_name":"android",
 			"category_data":[
 				{
 					"url":"android/MeasureLayoutDraw.txt",
@@ -222,6 +222,6 @@
 					"filentype":"txt"
 				}
 			]
-		},
+		}
 	]
 }
