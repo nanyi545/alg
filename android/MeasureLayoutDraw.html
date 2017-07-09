@@ -9,10 +9,12 @@
 <p>中文使用UTF-8</p>
 
 <h3>MeasureSpec</h3>
-<p>    MeasureSpec   -->  2bit: mode ( UNSPECIFIED / EXACTLY --> match_parent|xx dp / AT_MOST  --> wrap_content )        30bit: size(in px)
+<pre>
+<code>  MeasureSpec   -->  2bit: mode ( UNSPECIFIED / EXACTLY --> match_parent|xx dp / AT_MOST  --> wrap_content )        30bit: size(in px)
         int specMode = MeasureSpec.getMode(measureSpec);
         int specSize = MeasureSpec.getSize(measureSpec);
-</p>
+</code>
+</pre>
 
 <h3>measure</h3>
 <h4>step1  in parent: get measure spec for child  and call    child.measure(childWidthMeasureSpec, childHeightMeasureSpec)  </h4>
