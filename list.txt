@@ -224,6 +224,11 @@
 					"url":"android/MeasureLayoutDraw.txt",
 					"filename":"MeasureLayoutDraw",
 					"filentype":"txt"
+				},
+				{
+					"url":"android/TestHtml.html",
+					"filename":"TestHtml",
+					"filentype":"html"
 				}
 			]
 		}
