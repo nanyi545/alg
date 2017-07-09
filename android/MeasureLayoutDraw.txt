@@ -48,22 +48,25 @@ performMeasure(childWidthMeasureSpec, childHeightMeasureSpec);  ----->  mView.me
 
 summary of getChildMeasureSpec() method (equivalent of getRootMeasureSpec() )
 
-+--------------+----------+-------------+------------+ 
-|              | parent   |             |            |
-|              | spec mode| exactly     | at_most    |
-+--------------+----------+-------------+------------+ 
-|child         |          |             |            |
-|layoutParam   |          |             |            | 
-+--------------+----------+-------------+------------+ 
-|size: dp/px   |          | exactly     | exactly    | 
-|              |          | child size  | child size | 
-+--------------+----------+-------------+------------+ 
-|match_parent  |          | exactly     | at most    | 
-|              |          | parent size | parent size|
-+--------------+----------+-------------+------------+ 
-|wrap_content  |          | at most     | at most    |
-|              |          | parent size | parent size| 
-+--------------+----------+-------------+------------+ 
++-----------+----------+-------------+------------+ 
+|           | parent   |             |            |
+|           | spec mode| exactly     | at_most    |
++-----------+----------+-------------+------------+ 
+|child      |          |             |            |
+|layoutParam|          |             |            | 
++-----------+----------+-------------+------------+ 
+|size       |          |             |            |
+| dp/px     |          | exactly     | exactly    | 
+|           |          | child size  | child size | 
++-----------+----------+-------------+------------+ 
+|match_     |          |             |            |
+|parent     |          | exactly     | at most    | 
+|           |          | parent size | parent size|
++-----------+----------+-------------+------------+ 
+|wrap_      |          |             |            |
+| content   |          | at most     | at most    |
+|           |          | parent size | parent size| 
++-----------+----------+-------------+------------+ 
 
 
 ---------------------------------------------------------------------------------------------------------
