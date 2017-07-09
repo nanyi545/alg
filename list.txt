@@ -7,12 +7,12 @@
 				{
 					"url":"string_related/PRN_evaluator.txt",
 					"filename":"PRN_evaluator",
-					"filentype":"txt"
+					"type":"txt"
 				},
 				{
 					"url":"string_related/longest_substring.txt",
 					"filename":"LongestSubstring",
-					"filentype":"txt"
+					"type":"txt"
 				}
 			]
 		},
@@ -22,42 +22,42 @@
 				{
 					"url":"sort/mergesort.txt",
 					"filename":"mergesort",
-					"filentype":"txt"
+					"type":"txt"
 				},
 				{
 					"url":"sort/BinarySearch.txt",
 					"filename":"BinarySearch",
-					"filentype":"txt"
+					"type":"txt"
 				},
 				{
 					"url":"sort/BinaryBoundarySearch.txt",
 					"filename":"BinaryBoundarySearch",
-					"filentype":"txt"
+					"type":"txt"
 				},
 				{
 					"url":"sort/MaximumSubArray.txt",
 					"filename":"MaximumSubArray",
-					"filentype":"txt"
+					"type":"txt"
 				},
 				{
 					"url":"sort/QuickSort.txt",
 					"filename":"QuickSort",
-					"filentype":"txt"
+					"type":"txt"
 				},
 				{
 					"url":"sort/StaticMedian",
 					"filename":"StaticMedian",
-					"filentype":"txt"
+					"type":"txt"
 				},
 				{
 					"url":"sort/FindPair.txt",
 					"filename":"FindPair",
-					"filentype":"txt"
+					"type":"txt"
 				},
 				{
 					"url":"sort/Sum3.txt",
 					"filename":"Sum3",
-					"filentype":"txt"
+					"type":"txt"
 				}
 			]
 		},
@@ -67,12 +67,12 @@
 				{
 					"url":"stack/NextLargerElement.txt",
 					"filename":"NextLargerElement",
-					"filentype":"txt"
+					"type":"txt"
 				},
 				{
 					"url":"stack/pairing.txt",
 					"filename":"pairing",
-					"filentype":"txt"
+					"type":"txt"
 				}
 			]
 		},
@@ -82,27 +82,27 @@
 				{
 					"url":"hash/BSToverHash.txt",
 					"filename":"BSToverHash1",
-					"filentype":"txt"
+					"type":"txt"
 				},
 				{
 					"url":"hash/FindPair.txt",
 					"filename":"FindPair",
-					"filentype":"txt"
+					"type":"txt"
 				},
 				{
 					"url":"hash/SumOfTarget.txt",
 					"filename":"SumOfTarget",
-					"filentype":"txt"
+					"type":"txt"
 				},
 				{
 					"url":"hash/IsSubArray.txt",
 					"filename":"IsSubArray",
-					"filentype":"txt"
+					"type":"txt"
 				},
 				{
 					"url":"hash/UnionIntersect.txt",
 					"filename":"UnionIntersect",
-					"filentype":"txt"
+					"type":"txt"
 				}
 			]
 		},
@@ -112,42 +112,42 @@
 				{
 					"url":"tree/definitions.txt",
 					"filename":"definitions",
-					"filentype":"txt"
+					"type":"txt"
 				},
 				{
 					"url":"tree/TreeCompare.txt",
 					"filename":"TreeCompare",
-					"filentype":"txt"
+					"type":"txt"
 				},
 				{
 					"url":"tree/PriorityQueueBasics.txt",
 					"filename":"Priority_Queue_Basics",
-					"filentype":"txt"
+					"type":"txt"
 				},
 				{
 					"url":"tree/DynamicMedianByPriorityQueue",
 					"filename":"DynamicMedianByPriorityQueue",
-					"filentype":"txt"
+					"type":"txt"
 				},
 				{
 					"url":"tree/HeapSort.txt",
 					"filename":"HeapSort",
-					"filentype":"txt"
+					"type":"txt"
 				},
 				{
 					"url":"tree/IsBST_LCAinBST.txt",
 					"filename":"valid_BST_AND_LCA_in_BST",
-					"filentype":"txt"
+					"type":"txt"
 				},
 				{
 					"url":"tree/LCAinBinaryTree.txt",
 					"filename":"LCAinOrdinaryBinaryTree__DrawBinaryTree",
-					"filentype":"txt"
+					"type":"txt"
 				},
 				{
 					"url":"tree/IsFull.txt",
 					"filename":"ValidFull_binary_tree",
-					"filentype":"txt"
+					"type":"txt"
 				}
 				
 			]
@@ -158,7 +158,7 @@
 				{
 					"url":"linkedstructure/Add2Numbers.txt",
 					"filename":"Add_2Numbers",
-					"filentype":"txt"
+					"type":"txt"
 				}
 			]
 		},
@@ -168,7 +168,7 @@
 				{
 					"url":"recursion/Fib.txt",
 					"filename":"Fib",
-					"filentype":"txt"
+					"type":"txt"
 				}
 			]
 		},
@@ -178,22 +178,22 @@
 				{
 					"url":"math/FindMissingNumber.txt",
 					"filename":"FindMissingNumber",
-					"filentype":"txt"
+					"type":"txt"
 				},
 				{
 					"url":"math/bitwise.txt",
 					"filename":"bitWise",
-					"filentype":"txt"
+					"type":"txt"
 				},
 				{
 					"url":"math/bitshift.txt",
 					"filename":"bitshift",
-					"filentype":"txt"
+					"type":"txt"
 				},
 				{
 					"url":"math/MathOverFlow.txt",
 					"filename":"MathOverFlow",
-					"filentype":"txt"
+					"type":"txt"
 				}
 			]
 		},
@@ -203,17 +203,17 @@
 				{
 					"url":"java/jvm.txt",
 					"filename":"jvm",
-					"filentype":"txt"
+					"type":"txt"
 				},
 				{
 					"url":"java/gc.txt",
 					"filename":"gc",
-					"filentype":"txt"
+					"type":"txt"
 				},
 				{
 					"url":"java/leaks.txt",
 					"filename":"leaks",
-					"filentype":"txt"
+					"type":"txt"
 				}
 			]
 		},
@@ -223,12 +223,12 @@
 				{
 					"url":"android/MeasureLayoutDraw.txt",
 					"filename":"MeasureLayoutDraw",
-					"filentype":"txt"
+					"type":"txt"
 				},
 				{
 					"url":"android/TestHtml.html",
 					"filename":"TestHtml",
-					"filentype":"html"
+					"type":"html"
 				}
 			]
 		}
