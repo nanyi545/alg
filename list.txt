@@ -54,6 +54,11 @@
 					"url":"sort/FindPair.txt",
 					"filename":"FindPair",
 					"filentype":"txt"
+				},
+				{
+					"url":"sort/Sum3.txt",
+					"filename":"Sum3",
+					"filentype":"txt"
 				}
 			]
 		},
