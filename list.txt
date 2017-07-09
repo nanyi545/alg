@@ -226,6 +226,11 @@
 					"type":"txt"
 				},
 				{
+					"url":"android/MeasureLayoutDraw.html",
+					"filename":"MeasureLayoutDraw_html",
+					"type":"html"
+				},
+				{
 					"url":"android/TestHtml.html",
 					"filename":"TestHtml",
 					"type":"html"

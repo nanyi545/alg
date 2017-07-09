@@ -1,0 +1,25 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+</head>
+
+<body>
+
+<p>中文使用UTF-8</p>
+
+<h3>MeasureSpec</h3>
+<p>    MeasureSpec   -->  2bit: mode ( UNSPECIFIED / EXACTLY --> match_parent|xx dp / AT_MOST  --> wrap_content )        30bit: size(in px)
+        int specMode = MeasureSpec.getMode(measureSpec);
+        int specSize = MeasureSpec.getSize(measureSpec);
+</p>
+
+<h3>measure</h3>
+<h4>step1  in parent: get measure spec for child  and call    child.measure(childWidthMeasureSpec, childHeightMeasureSpec)  </h4>
+
+
+
+</body>
+
+
+</html>
