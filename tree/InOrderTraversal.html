@@ -1,0 +1,92 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<link href="prism.css" rel="stylesheet" />
+</head>
+
+<body>
+<script src="prism.js"></script>
+
+<pre>  
+<code class="language-java">
+
+
+/**
+* Given a binary tree, return the inorder traversal of its nodes' values.
+* Note: Recursive solution is trivial, could you do it iteratively?
+**/
+
+
+
+
+/**
+* this method destroys the original tree... 
+**/
+public class Solution {
+    
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> ret=new ArrayList();
+        Stack<TreeNode> stack=new Stack();
+        if (root==null) return ret;
+        stack.push(root);
+        while(stack.size()>0){
+            TreeNode top=stack.pop();
+            if (top.left!=null){
+                TreeNode left=top.left;
+                top.left=null;
+                stack.push(top);
+                stack.push(left);
+            } else {
+                ret.add(top.val);
+                if (top.right!=null){
+                    stack.push(top.right);
+                }
+            }
+        }
+        return ret;
+    }
+    
+}
+
+
+/**
+this is the better method
+
+Explanation
+
+The basic idea is referred from here: using stack to simulate the recursion procedure: for each node, travel to its left child until it's left leaf, then pop to left leaf's higher level node A, and switch to A's right branch. Keep the above steps until cur is null and stack is empty. As the following:
+
+Runtime = O(n): As each node is visited once
+
+Space = O(n)
+
+**/ 
+
+
+
+public List<Integer> inorderTraversal(TreeNode root) {
+	List<Integer> res = new LinkedList<Integer>();
+	if (root == null) return res;
+	
+	Stack<TreeNode> stack = new Stack<TreeNode>();
+	TreeNode cur = root;
+	while (cur != null || !stack.isEmpty()) { 
+		while (cur != null) {// Travel to each node's left child, till reach the left leaf
+			stack.push(cur);
+			cur = cur.left;				
+		}		 
+		cur = stack.pop(); // Backtrack to higher level node A
+		res.add(cur.val);  // Add the node to the result list
+		cur = cur.right;   // Switch to A'right branch
+	}
+	return res;
+}
+</code>
+</pre>
+
+
+</body>
+
+
+</html>

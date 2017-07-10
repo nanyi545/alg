@@ -148,6 +148,11 @@
 					"url":"tree/IsFull.txt",
 					"filename":"ValidFull_binary_tree",
 					"type":"txt"
+				},
+				{
+					"url":"tree/InOrderTraversal.html",
+					"filename":"InOrderTraversal",
+					"type":"html"
 				}
 				
 			]
