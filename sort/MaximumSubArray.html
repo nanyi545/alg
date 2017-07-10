@@ -1,0 +1,84 @@
+﻿<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<link href="prism.css" rel="stylesheet" />
+</head>
+
+<body>
+<script src="prism.js"></script>
+
+<pre>  
+<code class="language-java">
+public class Solution {
+    
+    public int maxSubArray(int[] nums) {
+        int[] ret=maxSubArray(nums,0,nums.length-1);
+        return ret[2];
+    }
+    
+    public int[] maxSubArray(int[] arr,int lo,int hi){
+        int[] ret=new int[3];
+        if(lo==hi){
+            ret[0]=lo;
+            ret[1]=hi;
+            ret[2]=arr[lo];
+            return ret;
+        } 
+        int mid=(lo+hi)/2;
+        int[] leftMax=maxSubArray(arr,lo,mid);
+        int[] rightMax=maxSubArray(arr,mid+1,hi);
+        int[] midMax=maxSubArray(arr,lo,hi,mid);
+        ret=leftMax;
+        if (rightMax[2]>=ret[2]){
+            ret=rightMax;
+        }
+        if (midMax[2]>=ret[2]){
+            ret=midMax;
+        }
+        return ret;
+    }
+    
+   
+    public int[] maxSubArray(int[] arr,int lo,int hi,int pivot){
+        int right=pivot+1;
+        int maxRight=arr[pivot];
+        int temp=arr[pivot];
+        int maxRightIndex=pivot;
+        while(right <= hi ){
+            temp+=arr[right];
+            if(temp>=maxRight){
+                maxRight=temp;
+                maxRightIndex=right;
+            }
+            right+=1;
+        }
+        
+        int left=pivot-1;
+        int maxLeft=arr[pivot];
+        int t=arr[pivot];
+        int maxLeftIndex=pivot;
+        while(left>=lo){
+            t+=arr[left];
+            if(t>=maxLeft){
+                maxLeft=t;
+                maxLeftIndex=left;
+            }
+            left-=1;
+        }
+        int[] ret=new int[3];
+        ret[0]=left;
+        ret[1]=right;
+        ret[2]=maxRight+maxLeft-arr[pivot]; 
+        return ret;
+    }
+    
+}
+</code>
+</pre>
+
+
+</body>
+
+
+</html>

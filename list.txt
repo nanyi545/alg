@@ -30,9 +30,9 @@
 					"type":"txt"
 				},
 				{
-					"url":"sort/BinaryBoundarySearch.txt",
+					"url":"sort/BinaryBoundarySearch.html",
 					"filename":"BinaryBoundarySearch",
-					"type":"txt"
+					"type":"html"
 				},
 				{
 					"url":"sort/MaximumSubArray.txt",
