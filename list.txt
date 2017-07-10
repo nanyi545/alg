@@ -30,14 +30,14 @@
 					"type":"txt"
 				},
 				{
-					"url":"sort/BinaryBoundarySearch.html",
+					"url":"sort/BinaryBoundarySearch.txt",
 					"filename":"BinaryBoundarySearch",
-					"type":"html"
+					"type":"txt"
 				},
 				{
-					"url":"sort/MaximumSubArray.txt",
+					"url":"sort/MaximumSubArray.html",
 					"filename":"MaximumSubArray",
-					"type":"txt"
+					"type":"html"
 				},
 				{
 					"url":"sort/QuickSort.txt",
