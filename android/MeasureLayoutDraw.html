@@ -2,10 +2,12 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <style type="text/css">
-
-    </style>
-
+    
+<style type="text/css">
+table {border-collapse:collapse;}
+table td{border:1px solid #000000;}
+table th{border:1px solid #000000;}
+</style>
 <link href="prism.css" rel="stylesheet" />
 
 </head>
@@ -13,20 +15,35 @@
 <body>
 <script src="prism.js"></script>
 
-<p>中文使用UTF-8  MeasureSpec   -->  2bit: mode ( UNSPECIFIED / EXACTLY --> match_parent|xx dp / AT_MOST  --> wrap_content )   30bit: size(in px)</p>
+<p>中文使用UTF-8</p>
+
 
 <h3>MeasureSpec</h3>
+<pre>MeasureSpec -->  2bit: mode ( UNSPECIFIED / EXACTLY --> match_parent|xx dp / AT_MOST  --> wrap_content )   30bit: size(in px)</pre>
 <pre>  
 <code class="language-java">
-
-
 int specMode = MeasureSpec.getMode(measureSpec);
 int specSize = MeasureSpec.getSize(measureSpec);
+</code>
+</pre>
 
-    private static int getRootMeasureSpec(int windowSize, int rootDimension) {
+
+<h3>measure</h3>
+<h4>step1 </h4>
+<pre> in parent: get measure spec for child  and call    child.measure(childWidthMeasureSpec, childHeightMeasureSpec)   </pre>
+
+<h5>for ViewRootImpl,  has field: mView </h5>
+<pre>  
+<code class="language-java">
+measureHierarchy()
+childWidthMeasureSpec = getRootMeasureSpec(desiredWindowWidth, lp.width);   //   lp.width  :   can be following    MATCH_PARENT / WRAP_CONTENT / size in px 
+childHeightMeasureSpec = getRootMeasureSpec(desiredWindowHeight, lp.height);
+
+performMeasure(childWidthMeasureSpec, childHeightMeasureSpec);  ----->  mView.measure(childWidthMeasureSpec, childHeightMeasureSpec);   
+
+     private static int getRootMeasureSpec(int windowSize, int rootDimension) {
         int measureSpec;
         switch (rootDimension) {
-
         case ViewGroup.LayoutParams.MATCH_PARENT:
             // Window can't resize. Force root view to be windowSize.
             measureSpec = MeasureSpec.makeMeasureSpec(windowSize, MeasureSpec.EXACTLY);
@@ -41,12 +58,101 @@ int specSize = MeasureSpec.getSize(measureSpec);
             break;
         }
         return measureSpec;
-    }
+     }
 </code>
 </pre>
 
-<h3>measure</h3>
-<h4>step1  in parent: get measure spec for child  and call    child.measure(childWidthMeasureSpec, childHeightMeasureSpec)  </h4>
+
+<h5>for normal View ( ViewGroup ) in ViewGroup </h5>
+summary of getChildMeasureSpec() method (equivalent of getRootMeasureSpec() )
+
+
+<table>
+  <tr>
+    <th>&nbsp</th>
+    <th>parent spec mode</th>
+    <th>exactly</th>
+    <th>at_most</th>
+  </tr>
+  <tr>
+    <th>child layoutParam</th>
+    <td>&nbsp</td>
+    <td>&nbsp</td>
+    <td>&nbsp</td>
+  </tr>
+  <tr>
+    <th>size dp/px</th>
+    <td>&nbsp</td>
+    <td>exactly child size</td>
+    <td>exactly child size</td>
+  </tr>
+  <tr>
+    <th>match_parent</th>
+    <td>&nbsp</td>
+    <td>exactly parent size</td>
+    <td>at most parent size</td>
+  </tr>
+  <tr>
+    <th>wrap_content</th>
+    <td>&nbsp</td>
+    <td>at most parent size</td>
+    <td>at most parent size</td>
+  </tr>
+</table>
+
+
+<h4>step2 </h4>
+<pre> view.measure(childWidthMeasureSpec, childHeightMeasureSpec)  (measure is final) --> call onMeasure(childWidthMeasureSpec, childHeightMeasureSpec)   </pre>
+<pre> in onMeasure: set size based on measure spec , actual size is computed based on passed in measureSpecs </pre>
+
+examples of onMeasure
+<pre>  
+<code class="language-java">
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        int widthSpecMode = MeasureSpec.getMode(widthMeasureSpec);
+        int widthSpecSize = MeasureSpec.getSize(widthMeasureSpec);
+        int heightSpecMode = MeasureSpec.getMode(heightMeasureSpec);
+        int heightSpecSize = MeasureSpec.getSize(heightMeasureSpec);
+        if (widthSpecMode == MeasureSpec.AT_MOST
+                && heightSpecMode == MeasureSpec.AT_MOST) {
+            setMeasuredDimension(200, 200);
+        } else if (widthSpecMode == MeasureSpec.AT_MOST) {
+            setMeasuredDimension(200, heightSpecSize);
+        } else if (heightSpecMode == MeasureSpec.AT_MOST) {
+            setMeasuredDimension(widthSpecSize, 200);
+        }
+    }
+
+
+        int result=0;
+        int specMode = MeasureSpec.getMode(measureSpec);
+        int specSize = MeasureSpec.getSize(measureSpec);
+        switch (specMode){
+            case MeasureSpec.UNSPECIFIED:
+                result = defaultSize;
+                break;
+            case MeasureSpec.AT_MOST:   //  -----> wrap_content   !!!!!
+                result = Math.min(defaultSize, specSize);
+                break;
+            case MeasureSpec.EXACTLY:   // ---->  1  specifying size    2  match_parent  !!!!!!
+                result=specSize;   // spec Size is   in unit px  !!!
+                break;
+        }
+</code>
+</pre>
+
+<ul>
+  <li>for normal view : only need to add MeasureSpec.AT_MOST(wrap_content) case ... </li>
+  <li>for viewgroups ---> different implementations of onMeasure 
+    <ol>
+      <li>measure all children</li>
+      <li>set size for itself</li>
+      <li>re-measure all "match_parent" children ( since "match_parent" children's size depend on parent size )</li>
+    </ol>
+  </li>
+</ul>
 
 
 
