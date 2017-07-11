@@ -1,0 +1,78 @@
+1------------ include----------------
+
+        <include  
+            android:layout_width="match_parent"  
+            android:layout_height="wrap_content"  
+            layout="@layout/titlebar" />  
+
+
+2----------- merge-------------
+
+*** use one
+
+    <LinearLayout>  
+       <.../>  
+       <include  
+            android:layout_width="match_parent"  
+            android:layout_height="wrap_content"  
+            layout="@layout/xxx" /> 
+    <LinearLayout>  
+
+
+
+include this ,  the hiearachy will have 2 LinearLayouts
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android">  
+        <Button  ... />  
+        <Button  ... />  
+    </LinearLayout>  
+
+
+include this ,  the hiearachy will have 1 LinearLayout
+
+    <merge xmlns:android="http://schemas.android.com/apk/res/android">  
+        <Button  ... />  
+        <Button  ... />  
+    </merge>  
+
+
+***¡¡ use two
+
+this add the additional layout as child to the root frame layout ....
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.design.widget.CoordinatorLayout>   original layout
+
+    </android.support.design.widget.CoordinatorLayout>
+
+
+    <xxx>    additional layout 
+
+    </xxx>
+
+</merge>
+
+
+3----------ViewStub
+
+https://stackoverflow.com/questions/11577777/how-to-use-view-stub-in-android
+
+ViewStub is a View that is inflated lazily.
+
+You can declare a ViewStub in an XML file like this:
+
+ <ViewStub android:id="@+id/stub"
+           android:inflatedId="@+id/subTree"
+           android:layout="@layout/mySubTree"
+           android:layout_width="120dip"
+           android:layout_height="40dip" />
+
+
+        ViewStub viewStub = (ViewStub) findViewById(R.id.stub);  
+        if (viewStub != null) {  
+            View inflatedView = viewStub.inflate();  
+            editExtra1 = (EditText) inflatedView.findViewById(R.id.edit_extra1);  
+        }  
+
+

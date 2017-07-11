@@ -236,6 +236,11 @@
 					"type":"html"
 				},
 				{
+					"url":"android/LayoutTech1.txt",
+					"filename":"LayoutTech1",
+					"type":"txt"
+				},
+				{
 					"url":"android/TestHtml.html",
 					"filename":"TestHtml",
 					"type":"html"
