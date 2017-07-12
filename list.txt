@@ -58,6 +58,11 @@
 					"url":"sort/Sum3.txt",
 					"filename":"Sum3",
 					"type":"txt"
+				},
+				{
+					"url":"sort/RemoveDuplicates.txt",
+					"filename":"RemoveDuplicates",
+					"type":"txt"
 				}
 			]
 		},
