@@ -1,0 +1,83 @@
+http://tutorials.jenkov.com/java-concurrency/index.html
+
+Creating and Starting Threads: thread/runnable
+
+race conditions--> , the situation where two threads compete for the same resource, where the sequence in which the resource is accessed is significant, is called race conditions.
+
+critical section--> A code section that leads to race conditions is called a critical section.
+
+To prevent race conditions -->  you must make sure that the critical section is executed as an atomic instruction. 
+
+public class TwoSums {
+    
+    private int sum1 = 0;
+    private int sum2 = 0;
+    
+    public void add(int val1, int val2){
+        synchronized(this){
+            this.sum1 += val1;   
+            this.sum2 += val2;
+        }
+    }
+}
+
+To prevent race conditions the summing is executed inside a Java synchronized block. With this implementation only a single thread can ever execute the summing at the same time.
+
+However, since the two sum variables are independent of each other, you could split their summing up into two separate synchronized blocks, like this:
+
+public class TwoSums {
+    
+    private int sum1 = 0;
+    private int sum2 = 0;
+
+    private Integer sum1Lock = new Integer(1);
+    private Integer sum2Lock = new Integer(2);
+
+    public void add(int val1, int val2){
+        synchronized(this.sum1Lock){
+            this.sum1 += val1;   
+        }
+        synchronized(this.sum2Lock){
+            this.sum2 += val2;
+        }
+    }
+}
+
+Now two threads can execute the add() method at the same time. One thread inside the first synchronized block, and another thread inside the second synchronized block. The two synchronized blocks are synchronized on different objects, so two different threads can execute the two blocks independently. This way threads will have to wait less for each other to execute the add() method.
+----------------------------------------------------------
+memory£º
+
+The thread stack   -->  contains information about what methods the thread has called to reach the current point of execution. (call stack)
+The thread stack   -->  contains all local variables for each method being executed (all methods on the call stack). 
+
+**  A local variable may be of a primitive type  --> totally kept on the thread stack.
+
+**  A local variable may also be a reference to an object.--> the reference (the local variable) is stored on the thread stack, but the object itself if stored on the heap.
+
+**  An object may contain methods and these methods may contain local variables. These local variables are also stored on the thread stack, even if the object the method belongs to is stored on the heap.
+
+***  An object's member variables are stored on the heap along with the object itself. ---> That is true both when the member variable is of a primitive type, and if it is a reference to an object.
+
+**  Static class variables are also stored on the heap along with the class definition.
+
+**  Objects on the heap can be accessed by all threads that have a reference to the object. When a thread has access to an object, it can also get access to that object's member variables. If two threads call a method on the same object at the same time, they will both have access to the object's member variables, but each thread will have its own copy of the local variables.
+
+
+----------------------------Synchronized ------------------
+
+Synchronized blocks in Java are marked with the synchronized keyword. 
+
+A synchronized block in Java is [ synchronized on some object ].
+
+All synchronized blocks synchronized on the same object can only have one thread executing inside them at the same time.
+
+*** A synchronized instance method in Java is synchronized on the instance (object) owning the method. 
+
+*** Synchronized static methods are synchronized on the class object of the class the synchronized static method belongs to. 
+
+
+---------------volatile------------
+
+The problem with threads not seeing the latest value of a variable because it has not yet been written back to main memory by another thread, is called a "visibility" problem.
+
+

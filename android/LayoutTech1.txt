@@ -36,7 +36,7 @@ include this ,  the hiearachy will have 1 LinearLayout
     </merge>  
 
 
-***¡¡ use two
+***use two
 
 this add the additional layout as child to the root frame layout ....
 

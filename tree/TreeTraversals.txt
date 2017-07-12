@@ -1,0 +1,71 @@
+
+https://stackoverflow.com/questions/9456937/when-to-use-preorder-postorder-and-inorder-binary-search-tree-traversal-strate
+
+
+Before you can understand under what circumstances to use pre-order, in-order and post-order for a binary tree, you have to understand exactly how each traversal strategy works. Use the following tree as an example.
+
+The root of the tree is 7, the left most node is 0, the right most node is 10.
+
+
+                     7
+               1           9 
+            0     3     8     10
+                2   5
+                   4 6
+
+
+-------------Pre-order traversal:
+
+Summary: Begins at the root (7), ends at the right-most node (10)
+
+Traversal sequence: 7, 1, 0, 3, 2, 5, 4, 6, 9, 8, 10
+
+-------------In-order traversal:
+
+Summary: Begins at the left-most node (0), ends at the rightmost node (10)
+
+Traversal Sequence: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+
+--------------Post-order traversal:
+
+Summary: Begins with the left-most node (0), ends with the root (7)
+
+Traversal sequence: 0, 2, 4, 6, 5, 3, 1, 8, 10, 9, 7
+When to use Pre-Order, In-order or Post-Order?
+
+The traversal strategy the programmer selects depends on the specific needs of the algorithm being designed. The goal is speed, so pick the strategy that brings you the nodes you require the fastest.
+
+    If you know you need to explore the roots before inspecting any leaves, you pick pre-orderbecause you will encounter all the roots before all of the leaves.
+
+    If you know you need to explore all the leaves before any nodes, you select post-orderbecause you don't waste any time inspecting roots in search for leaves.
+
+    If you know that the tree has an inherent sequence in the nodes, and you want to flatten the tree back into its original sequence, than an in-order traversal should be used. The tree would be flattened in the same way it was created. A pre-order or post-order traversal might not unwind the tree back into the sequence which was used to create it
+
+
+https://analgorithmaday.blogspot.jp/2011/06/applications-of-traversals.html
+
+--------------IN-order traversal
+ in-order traversal, we can extract the sorted values in a BST
+
+--------------Pre-order traversal
+
+      As we already know. root-left-right. . Similarly There are many things we can derive from pre-order as well. Many operations which needs to visit all the root nodes first use pre-order traversals.
+
+We will see some of the following applications now,
+
+    Tree copying
+    Counting the number of nodes
+    Counting the number of leaves
+    Prefix notation from a expression tree
+
+-----------------Post-order traversal
+
+     Post order first finishes the left-right and then visits the root. Its similar to popping elements from a tree. You take the leaves first and then the root.
+
+  The common applications are
+
+    Deleting a binary tree
+    All stack oriented programming languages ¨C mostly functional languages which fully works on nested functions.
+    Calculator programs
+    postfix notation in an expression tree ¨C used in calculators
+

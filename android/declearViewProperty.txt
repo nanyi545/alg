@@ -1,0 +1,27 @@
+<declare-styleable name="LoadView">
+    <attr name="loadPercent" format="float" />
+    <attr name="loadingBackground" format="reference" />
+    <attr name="loadingImage" format="reference" />
+    <attr name="loadingDirection" format="enum">
+        <enum name="horizontal" value="10" />
+        <enum name="vertical" value="11" />
+    </attr>
+</declare-styleable>
+
+
+
+
+private void loadInitValues(Context context, AttributeSet attrs) {
+    TypedArray a = context.obtainStyledAttributes(
+            attrs,
+            R.styleable.LoadView
+    );
+    try {
+        ratio = a.getFloat(R.styleable.LoadView_loadPercent, 0);
+        bckGroundRes = a.getResourceId(R.styleable.LoadView_loadingBackground, 0);
+        imgRes = a.getResourceId(R.styleable.LoadView_loadingImage, 0);
+        loadingDirection = a.getInt(R.styleable.LoadView_loadingDirection, HORIZONTAL_LOADING);
+    } finally {
+        a.recycle();
+    }
+}

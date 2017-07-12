@@ -1,0 +1,52 @@
+http://codetheory.in/understanding-android-input-touch-events/
+
+
+**** The assumptions
+
+We'll only look at the most important events (actually, actions): DOWN, MOVE, UP, and CANCEL. A gesture is a series of events beginning with a single DOWN event when the user touches the screen, zero or more MOVE events when the user moves the finger around, and a single UP or CANCEL event, when the user releases the screen or the system tells you that the gesture is over for some other reason. When I talk about ***********※the rest of this gesture§ I mean all subsequent MOVE events and the final UP or CANCEL event. ***********
+
+
+----------step0---------------
+
+Activity.dispatchTouchEvent()
+---Always first to be called.
+---Sends event to the root view attached to the window. 
+
+--> Activity.dispatchTouchEvent() returns true then it＊ll consume all the subsequent gesture events (MOVE/UP). 
+--> Whereas on returning false it＊ll never be called again for subsequent events.
+
+The root view starts dispatching the event down to its children. Let＊s presume that we have this hierarchy:
+----A 每 ViewGroup1 (parent of B).
+----B 每 ViewGroup2 (parent of C).
+----C 每 View (child of B) 每 receives a touch/tap/click.
+
+
+----------step1---------------   A.dispatchTouchEvent() to B.dispatchTouchEvent() +  B.dispatchTouchEvent() to C.dispatchTouchEvent()
+
+Now the root view will call A.dispatchTouchEvent(). 
+
+---******  
+A.dispatchTouchEvent() will first call A.onInterceptTouchEvent() (onInterceptTouchEvent() this is only in ViewGroup) to see if the view group is interested in intercepting the event and handling the subsequent gesture by itself (scrolling is a good use case where a fling on B should lead to scrolling on A). ------------->  on returning false,  dispatching continues as usual. 
+
+then for each child view, in the reverse order they were added.
+
+** Call the child.dispatchTouchEvent() if the touch is relevant (inside the view).
+** If not handled by previous (by returning true from previous_child.dispatchTouchEvent() or even previous_child.onInterceptTouchEvent()) then pass on to the next child view.
+** If no children handles the event, then OnTouchListener.onTouch() gets the chance if defined, else onTouchEvent() does. 
+
+job of a ViewGroup.dispatchEvent() (not View.dispatchEvent()) is to find out all the child views and view groups whose bounds contain the touch point coordinates.  
+
+------------->  on returning true, this is what＊ll happen:
+**  ACTION_CANCEL will be dispatched to all the children.
+**  All the subsequent gesture events (till ACTION_UP/ACTION_CANCEL) will be consumed by the event listeners (OnTouchListener.onTouch()) if defined, else the event handler A.onTouchEvent() at A＊s level.
+**  A.onInterceptTouchEvent() itself will be never called again.
+
+
+----------step2---------------  how C.dispatchTouchEvent() works:
+
+---- Sends event to View.OnTouchListener.onTouch() event listener firsts, if exists.
+
+---- If not consumed (true returned by one of the event listeners), processes the touch itself by calling View.onTouchEvent().
+--------------So if C.onTouchEvent() returns false, then it goes back up to B.onTouchEvent(). If that returns false then it goes back up to A.onTouchEvent(). **!! if every level returns false then the events ends up in Activity.onTouchEvent().
+
+

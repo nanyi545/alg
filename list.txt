@@ -153,8 +153,12 @@
 					"url":"tree/InOrderTraversal.html",
 					"filename":"InOrderTraversal",
 					"type":"html"
+				},
+				{
+					"url":"tree/TreeTraversals.txt",
+					"filename":"TreeTraversals",
+					"type":"html"
 				}
-				
 			]
 		},
 		{
@@ -225,6 +229,26 @@
 		{
 			"category_name":"android",
 			"category_data":[
+				{
+					"url":"android/ProcessVsThread.txt",
+					"filename":"ProcessVsThread",
+					"type":"txt"
+				},
+				{
+					"url":"android/concurrencyBasics1.txt",
+					"filename":"concurrencyBasics1",
+					"type":"txt"
+				},
+				{
+					"url":"android/declearViewProperty.txt",
+					"filename":"declearViewProperty",
+					"type":"txt"
+				},
+				{
+					"url":"android/touchevent.txt",
+					"filename":"touchevent",
+					"type":"txt"
+				},
 				{
 					"url":"android/MeasureLayoutDraw.txt",
 					"filename":"MeasureLayoutDraw",
