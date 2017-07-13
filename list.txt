@@ -108,6 +108,11 @@
 					"url":"hash/UnionIntersect.txt",
 					"filename":"UnionIntersect",
 					"type":"txt"
+				},
+				{
+					"url":"hash/SortColors.txt",
+					"filename":"SortColors",
+					"type":"txt"
 				}
 			]
 		},
