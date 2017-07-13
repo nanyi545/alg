@@ -163,7 +163,12 @@
 					"url":"tree/TreeTraversals.txt",
 					"filename":"TreeTraversals",
 					"type":"html"
-				}
+				},
+				{
+					"url":"tree/MaxDepthBinaryTree.txt",
+					"filename":"MaxDepthBinaryTree",
+					"type":"txt"
+				}		
 			]
 		},
 		{
