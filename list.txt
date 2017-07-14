@@ -290,6 +290,16 @@
 					"type":"html"
 				}
 			]
+		},
+		{
+			"category_name":"logic",
+			"category_data":[
+				{
+					"url":"logic/longestCommonPrefix.txt",
+					"filename":"longestCommonPrefix",
+					"type":"txt"
+				}
+			]
 		}
 	]
 }
