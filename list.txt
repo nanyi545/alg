@@ -172,7 +172,7 @@
 				{
 					"url":"tree/TreeTraversals.txt",
 					"filename":"TreeTraversals",
-					"type":"html"
+					"type":"txt"
 				},
 				{
 					"url":"tree/MaxDepthBinaryTree.txt",
