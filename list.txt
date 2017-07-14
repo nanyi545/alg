@@ -63,6 +63,11 @@
 					"url":"sort/RemoveDuplicates.txt",
 					"filename":"RemoveDuplicates",
 					"type":"txt"
+				},
+				{
+					"url":"sort/TopKFrequent.txt",
+					"filename":"TopKFrequent",
+					"type":"txt"
 				}
 			]
 		},
