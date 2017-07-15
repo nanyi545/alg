@@ -1,0 +1,32 @@
+/**
+
+Input:Digit string "23"
+
+Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
+
+**/
+
+public class Solution {
+    
+    public List<String> letterCombinations(String digits) {
+        String[] map=new String[]{"0","1","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};   //    0-->0  1-->1  2-->abc  ....  
+        LinkedList<String> ans=new LinkedList();
+        if (digits==null||digits.length()==0) return ans;
+        ans.addLast("");
+        
+        for (int i=1;i<=digits.length();i++){     //  iterate through the digits ... 
+            while( ans.peekFirst().length() < i  ){  // add to all the items until target length is reached 
+                String temp=ans.removeFirst();
+                int digit=Integer.parseInt( digits.substring(i-1,i) );  
+                String str=map[digit];
+                char[] chars=str.toCharArray();    
+                for (char t:chars){
+                    ans.addLast(temp+t);       //  add to each item X times ( X being length in the map ) 
+                }
+            }
+        }
+        return ans;
+        
+    }
+    
+}

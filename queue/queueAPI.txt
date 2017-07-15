@@ -1,0 +1,38 @@
+
+
+
+public interface Deque<E> extends Queue<E> 
+|
+|void addFirst(E e);
+|void addLast(E e);
+|boolean offerFirst(E e);
+|boolean offerLast(E e);
+|E removeFirst();
+|E removeLast();
+|E peekFirst();
+|E peekLast(); .....
+L________________
+
+
+
+class Stack<E> extends Vector<E> {
+
+
+
+Vector ---> thread safe ArrayList
+
+
+
+public class LinkedList<E>
+    extends AbstractSequentialList<E>
+    implements List<E>, Deque<E>, Cloneable, java.io.Serializable
+
+
+public class ArrayList<E> extends AbstractList<E>
+        implements List<E>, RandomAccess, Cloneable, java.io.Serializable
+
+
+
+
+
+

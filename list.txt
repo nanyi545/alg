@@ -305,6 +305,21 @@
 					"type":"txt"
 				}
 			]
+		},
+		{
+			"category_name":"queue",
+			"category_data":[
+				{
+					"url":"queue/queueAPI.txt",
+					"filename":"queueAPI",
+					"type":"txt"
+				},
+				{
+					"url":"queue/combinations.txt",
+					"filename":"combinations",
+					"type":"txt"
+				}
+			]
 		}
 	]
 }
