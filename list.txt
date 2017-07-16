@@ -320,6 +320,16 @@
 					"type":"txt"
 				}
 			]
+		},
+		{
+			"category_name":"combinations",
+			"category_data":[
+				{
+					"url":"combinations/uniquePath.txt",
+					"filename":"uniquePath",
+					"type":"txt"
+				}
+			]
 		}
 	]
 }

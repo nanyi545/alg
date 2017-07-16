@@ -4,6 +4,8 @@ Input:Digit string "23"
 
 Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
 
+----pattern for zu he----
+
 **/
 
 public class Solution {
