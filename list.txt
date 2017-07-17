@@ -68,6 +68,11 @@
 					"url":"sort/TopKFrequent.txt",
 					"filename":"TopKFrequent",
 					"type":"txt"
+				},
+				{
+					"url":"sort/RotatedSortedArray.txt",
+					"filename":"RotatedSortedArray",
+					"type":"txt"
 				}
 			]
 		},
