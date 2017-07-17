@@ -1,0 +1,70 @@
+
+/**
+
+Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand.
+
+(i.e., 0 1 2 4 5 6 7 might become 4 5 6 7 0 1 2).
+
+You are given a target value to search. If found in the array return its index, otherwise return -1.
+
+**/
+
+
+
+public class Solution {
+    
+    
+    
+    public int search(int[] nums, int target) {
+        
+        if(nums.length==0) return -1;
+        
+        int point=0;  //  0--point   point+1  ---nums.length-1
+
+        //   [ this is the key1 ,  break the array in 2 parts ]
+        for (int i=0;i<nums.length-1;i++){    
+            if(nums[i+1]>nums[i])  { 
+                point++;
+            } else {
+                break;
+            }
+        }
+        
+        //  [ this is the key2 ,  check if the array is shifted ... ]
+        if(point==nums.length-1) {
+            return search(nums,target,0,nums.length-1);
+        }
+        
+        if( target >= nums[0] ) {
+            return search(nums,target,0,point);
+        } else {
+            return search(nums,target,point+1,nums.length-1);
+        }
+        
+        
+    }
+    
+    
+    
+    public int search(int[] nums, int target, int lo,int hi){
+        
+        while (lo <= hi) {
+            
+            int mid=(lo+hi)/2;
+            if(target==nums[mid]){
+                return mid;
+            } 
+            if( nums[mid] < target) {
+                lo =mid+1;
+            }
+            if( nums[mid] > target) {
+                hi=mid-1;
+            }
+            
+        }
+        return -1;
+        
+    }
+    
+    
+}
