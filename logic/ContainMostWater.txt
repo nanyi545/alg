@@ -1,0 +1,96 @@
+
+/**
+
+Given n non-negative integers a1, a2, ..., an 
+  , where each represents a point at coordinate (i, ai). 
+  
+n vertical lines are drawn such that the two endpoints of line i is at (i, ai) and (i, 0).
+
+*  Find two lines, which together with x-axis forms a container, such that the container contains the most water.
+
+**/
+
+
+public class Solution {
+    
+    
+    public int maxArea(int[] height) {
+        
+        int s=0;
+        int e=height.length-1;
+        int max=area(s,e,height);
+        
+        while(s<e){
+            if(height[s]<height[e]){
+                s=nextS(s,height);
+                if(s<e) {
+                    int newArea=area(s,e,height);
+                    if(newArea>max) {
+                        max=newArea;
+                    }
+                }
+            }
+            
+            if(height[s]>height[e]){
+                e=nextE(e,height);
+                if(s<e){
+                    int newArea=area(s,e,height);
+                    if(newArea>max) {
+                        max=newArea;
+                    }
+                }
+            } 
+            
+            if(height[s]==height[e]) {
+                s=nextS(s,height);
+                e=nextE(e,height);
+                if(s<e){
+                    int newArea=area(s,e,height);
+                    if(newArea>max) {
+                        max=newArea;
+                    }
+                }
+                
+            }
+            
+            
+            
+        }
+        return max;
+        
+    }
+    
+    
+    
+    int area(int a,int b,int[] height){
+        int wall= (height[a]<height[b]) ? height[a] : height[b];
+        int length=b-a;
+        return wall*length;
+    }
+    
+    
+    int nextS(int s,int[] height){
+        int ret=height.length-1;
+        for (int i=s+1;i<height.length;i++){
+            if(height[i]>height[s]) {
+                ret=i;
+                break;
+            }
+        }
+        return ret;
+    }
+    
+    int nextE(int e,int[] height){
+        int ret=0;
+        for (int i=e-1;i>=0;i--){
+            if(height[i]>height[e]) {
+                ret=i;
+                break;
+            }
+        }
+        return ret;
+    }
+    
+
+    
+}
