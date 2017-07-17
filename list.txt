@@ -310,6 +310,21 @@
 			"category_name":"android",
 			"category_data":[
 				{
+					"url":"android/touchevent.txt",
+					"filename":"touchevent",
+					"type":"txt"
+				},
+				{
+					"url":"android/MeasureLayoutDraw.txt",
+					"filename":"MeasureLayoutDraw",
+					"type":"txt"
+				},
+				{
+					"url":"android/MeasureLayoutDraw.html",
+					"filename":"MeasureLayoutDraw_html",
+					"type":"html"
+				},
+				{
 					"url":"android/ProcessVsThread.txt",
 					"filename":"ProcessVsThread",
 					"type":"txt"
@@ -325,19 +340,9 @@
 					"type":"txt"
 				},
 				{
-					"url":"android/touchevent.txt",
-					"filename":"touchevent",
+					"url":"android/OnRestoreInstanceState.txt",
+					"filename":"OnRestoreInstanceState",
 					"type":"txt"
-				},
-				{
-					"url":"android/MeasureLayoutDraw.txt",
-					"filename":"MeasureLayoutDraw",
-					"type":"txt"
-				},
-				{
-					"url":"android/MeasureLayoutDraw.html",
-					"filename":"MeasureLayoutDraw_html",
-					"type":"html"
 				},
 				{
 					"url":"android/LayoutTech1.txt",

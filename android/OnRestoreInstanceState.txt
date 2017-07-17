@@ -1,0 +1,23 @@
+https://stackoverflow.com/questions/4096169/onsaveinstancestate-and-onrestoreinstancestate
+
+onRestoreInstanceState() is called only when recreating activity after it was killed by the OS. Such situation happen when:
+    * orientation of the device changes (your activity is destroyed and recreated)
+    * there is another activity in front of yours and at some point the OS kills your activity in order to free memory (for example). Next time when you start your activity onRestoreInstanceState() will be called.
+
+
+
+
+(1)-------------->  activity change orientation :
+ onSaveInstanceState()   --> onDestroy()     --> onCreate()   ---> onRestoreInstanceState()
+
+** save view states in SavedState Class 
+
+
+https://stackoverflow.com/questions/28586443/android-view-onsaveinstancestate-not-called
+
+** Android didn't manage the onSaveInstanceState/onRestoreInstanceState if no [id] is set to the view. 
+
+
+
+(2)-------------->  when not enough resource to keep an activity  
+also call     onSaveInstanceState()   --> onDestroy()     --> onCreate()   ---> onRestoreInstanceState()
