@@ -88,6 +88,11 @@
 					"url":"stack/pairing.txt",
 					"filename":"pairing",
 					"type":"txt"
+				},
+				{
+					"url":"stack/MinStack.txt",
+					"filename":"MinStack",
+					"type":"txt"
 				}
 			]
 		},
