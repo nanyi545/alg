@@ -235,6 +235,11 @@
 					"type":"txt"
 				},
 				{
+					"url":"math/SingleNumber.txt",
+					"filename":"SingleNumber",
+					"type":"txt"
+				},
+				{
 					"url":"math/MathOverFlow.txt",
 					"filename":"MathOverFlow",
 					"type":"txt"
