@@ -1,0 +1,225 @@
+------------------------------------------------------------------
+
+public interface UseCaseScheduler {
+
+    void execute(Runnable runnable);
+
+    <V extends UseCase.ResponseValue> void notifyResponse(final V response,final UseCase.UseCaseCallback<V> useCaseCallback);
+
+    <V extends UseCase.ResponseValue> void onError(final V response,final UseCase.UseCaseCallback<V> useCaseCallback);
+
+}
+
+
+------------------------------------------------------------------
+
+public class UseCaseThreadPoolScheduler implements UseCaseScheduler {
+
+    private final Handler mHandler = new Handler(Looper.getMainLooper());
+
+    public static final int POOL_SIZE = 2;
+
+    public static final int MAX_POOL_SIZE = 4;
+
+    public static final int TIMEOUT = 30;
+
+    ThreadPoolExecutor mThreadPoolExecutor;
+
+    public UseCaseThreadPoolScheduler() {
+        mThreadPoolExecutor = new ThreadPoolExecutor(POOL_SIZE, MAX_POOL_SIZE, TIMEOUT,
+                TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(POOL_SIZE));
+    }
+
+    @Override
+    public void execute(Runnable runnable) {
+        mThreadPoolExecutor.execute(runnable);
+    }
+
+    @Override
+    public <V extends UseCase.ResponseValue> void notifyResponse(final V response,
+            final UseCase.UseCaseCallback<V> useCaseCallback) {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                useCaseCallback.onSuccess(response);
+            }
+        });
+    }
+
+    onError....
+
+}
+
+------------------------------------------------------------------
+
+
+
+public class UseCaseHandler {
+
+    private static UseCaseHandler INSTANCE;
+
+    private final UseCaseScheduler mUseCaseScheduler;
+
+    public UseCaseHandler(UseCaseScheduler useCaseScheduler) {
+        mUseCaseScheduler = useCaseScheduler;
+    }
+
+    public <T extends UseCase.RequestValues, R extends UseCase.ResponseValue> void execute(
+            final UseCase<T, R> useCase, T values, UseCase.UseCaseCallback<R> callback) {
+        useCase.setRequestValues(values);
+
+        /*******
+            
+           this is the key step here ...
+           
+           useCase.run();  will call callbacks :  getUseCaseCallback().onSuccess(...)
+
+           UiCallbackWrapper  will do the job of calling callback on UI thread :
+               through   mUseCaseScheduler.notifyResponse(....)
+              
+        *******/
+
+        useCase.setUseCaseCallback(new UiCallbackWrapper(callback, this));  
+
+        mUseCaseScheduler.execute(new Runnable() {
+            @Override
+            public void run() {
+                useCase.run();
+            }
+        });
+    }
+
+    public <V extends UseCase.ResponseValue> void notifyResponse(final V response,
+            final UseCase.UseCaseCallback<V> useCaseCallback) {
+        mUseCaseScheduler.notifyResponse(response, useCaseCallback);
+    }
+
+    private <V extends UseCase.ResponseValue> void notifyError(final V response,
+            final UseCase.UseCaseCallback<V> useCaseCallback) {
+        mUseCaseScheduler.onError(response,useCaseCallback);
+    }
+
+    private static final class UiCallbackWrapper<V extends UseCase.ResponseValue> implements
+            UseCase.UseCaseCallback<V> {
+        
+        ......
+
+        @Override
+        public void onSuccess(V response) {
+            mUseCaseHandler.notifyResponse(response, mCallback);
+        }
+
+        onError...
+
+    }
+
+    public static UseCaseHandler getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new UseCaseHandler(new UseCaseThreadPoolScheduler());
+        }
+        return INSTANCE;
+    }
+
+
+    /**
+     * task in background without any UI response ...
+     * @param task
+     */
+    public static void executeInBackground(Runnable task){
+        if (INSTANCE == null) {
+            INSTANCE = getInstance();
+        }
+        INSTANCE.mUseCaseScheduler.execute(task);
+    }
+
+}
+
+
+------------------------------------------------------------------
+
+
+public abstract class UseCase<Q extends UseCase.RequestValues, P extends UseCase.ResponseValue> {
+
+    private Q mRequestValues;
+
+    private UseCaseCallback<P> mUseCaseCallback;
+
+    ...
+
+    void run() {
+       executeUseCase(mRequestValues);
+    }
+
+    /**
+     
+       2 things here
+        ---> 1  do the work to get data from request, normally this is implemented in a separate DataSource class
+        ---> 2  execute call back, getUseCaseCallback().onSuccess(...)/getUseCaseCallback().onErr(...)
+ 
+     */
+    protected abstract void executeUseCase(Q requestValues);
+
+    /**
+     * Data passed to a request.
+     */
+    public interface RequestValues {
+    }
+
+    /**
+     * Data received from a request.
+     */
+    public interface ResponseValue {
+    }
+
+
+    public interface UseCaseCallback<R> {
+        void onSuccess(R response);
+        void onError(R response);
+    }
+
+
+}
+
+
+------------------------------------------------------------------
+
+    Presenter example  
+
+
+
+public class HomePresenter implements HomeContract.HomePresenter{
+
+.....
+    private final UseCaseHandler mUseCaseHandler;
+    private final HomeContract.HomeView mView;
+    private final GetHotKeysUseCase getHotKeys;
+.....
+
+
+    @Override
+    public void getHotKeys() {
+
+        HotKeysData.HotKeysRequest reqData=new HotKeysData.HotKeysRequest();
+
+        GetHotKeysUseCase.RequestVal req=new GetHotKeysUseCase.RequestVal(reqData);
+
+        mUseCaseHandler.execute(getHotKeys,req,new GetHotKeysUseCase.UseCaseCallback<GetHotKeysUseCase.ResponseVal>(){
+            @Override
+            public void onSuccess(GetHotKeysUseCase.ResponseVal response) {
+                mView.displayHotkeys(response.getResData());
+                getHotKeyRetOk=true;
+                delockView();
+            }
+            @Override
+            public void onError(GetHotKeysUseCase.ResponseVal response) {
+                getHotKeyRetOk=false;
+                mView.displayErr(response.getErr());
+            }
+        });
+
+    }
+
+
+}
+
+
