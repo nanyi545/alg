@@ -188,7 +188,7 @@
 					"url":"tree/SortedArrayToBST.txt",
 					"filename":"SortedArrayToBST",
 					"type":"txt"
-				},
+				}
 			]
 		},
 		{
