@@ -255,6 +255,11 @@
 			"category_name":"logic",
 			"category_data":[
 				{
+					"url":"logic/isPalindrome.txt",
+					"filename":"isPalindrome",
+					"type":"txt"
+				},			
+				{
 					"url":"logic/longestCommonPrefix.txt",
 					"filename":"longestCommonPrefix",
 					"type":"txt"
