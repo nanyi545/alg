@@ -273,6 +273,11 @@
 					"url":"logic/PeakElement.txt",
 					"filename":"PeakElement",
 					"type":"txt"
+				},
+				{
+					"url":"logic/maxProduct.txt",
+					"filename":"maxProduct",
+					"type":"txt"
 				}
 			]
 		},
