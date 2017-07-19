@@ -360,6 +360,11 @@
 					"type":"txt"
 				},
 				{
+					"url":"android/TaskLaunchMode.txt",
+					"filename":"TaskLaunchMode",
+					"type":"txt"
+				},
+				{
 					"url":"android/concurrencyBasics1.txt",
 					"filename":"concurrencyBasics1",
 					"type":"txt"
