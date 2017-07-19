@@ -1,0 +1,41 @@
+public class Solution {
+    
+    
+    public boolean isPalindrome(String s) {
+        
+        //  replaceAll("\\s","")
+        //  \w = Anything that is a word character
+        //  \W = Anything that isn't a word character (including punctuation etc)
+        //  \s = Anything that is a space character (including space, tab characters etc)
+        //  \S = Anything that isn't a space character (including both letters and numbers, as well as punctuation etc)
+
+        String t=s.replaceAll("\\W","").toLowerCase();
+        char[] arr= t.toCharArray();
+        int length=arr.length;
+        
+        if(length==0||length==1) return true;
+        
+        
+        //  0 1 2 3 4  --> c1=2 c2=2
+        //  0 1 2 3    --> c1=1 c2=2
+        int c1=length/2-(length%2==0?1:0);
+        int c2=length/2;
+        
+        
+        boolean ret=true;
+        while (c1>=0) {
+            if(arr[c1]==arr[c2]){
+                c1--;c2++;
+            } else {
+                ret=false;
+                break;
+            }
+        }
+        
+        return ret;
+        
+        
+    }
+    
+    
+}
