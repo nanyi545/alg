@@ -1,0 +1,37 @@
+    
+    @Test
+    public void testMaxP(){
+        int[] arr=new int[] {1,12,-3,1,2,6,2};
+        System.out.println(maxProduct(arr));
+
+    }
+
+    
+    /**
+     * 
+     * 
+     i:1    val:12    max:12     min:12    result:12
+     i:2    val:-3    max:-3     min:-36    result:12
+     i:3    val:1    max:1     min:-36    result:12
+     i:4    val:2    max:2     min:-72    result:12
+     i:5    val:6    max:12     min:-432    result:12
+     i:6    val:2    max:24     min:-864    result:24
+     24
+
+     */
+    public int maxProduct(int[] A) {
+        if (A == null || A.length == 0) {
+            return 0;
+        }
+        int max = A[0], min = A[0], result = A[0];
+        for (int i = 1; i < A.length; i++) {
+            int temp = max;
+            max = Math.max(Math.max(max * A[i], min * A[i]), A[i]);
+            min = Math.min(Math.min(temp * A[i], min * A[i]), A[i]);
+            if (max > result) {
+                result = max;
+            }
+            System.out.println( "i:"+i+"    val:"+A[i]+"    max:"+max+"     min:"+min+"    result:"+result);
+        }
+        return result;
+    }
