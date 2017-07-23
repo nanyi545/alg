@@ -313,6 +313,11 @@
 					"url":"backtrack/subset.txt",
 					"filename":"subset",
 					"type":"txt"
+				},
+				{
+					"url":"backtrack/subset.png",
+					"filename":"subsetDiagram",
+					"type":"png"
 				}
 			]
 		},

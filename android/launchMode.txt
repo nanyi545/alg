@@ -1,0 +1,79 @@
+---------------------------------------
+Task Manager
+
+displays all the apps in memory... 
+
+---------------------------------------
+
+https://inthecheesefactory.com/blog/understand-android-activity-launchmode/en
+
+---------------------------------------
+
+<activity
+    android:name=".SingleTaskActivity"
+    android:label="singleTask launchMode"
+    android:launchMode="singleTask">
+
+
+----------standard------------
+
+This is the default mode.
+
+This kind of Activity would be created and placed on top of stack in the same task as one that sent an Intent.
+
+
+----------singleTop----------- 
+
+The next mode is singleTop. It acts almost the same as standard 
+
+Only difference is if there already is an Activity instance with the same type at the top of stack in the caller Task, there would not be any new Activity created, instead an Intent will be sent to an existed Activity instance through [ onNewIntent() ]   method.
+
+**  In singleTop mode, you have to handle an incoming Intent in both onCreate() and onNewIntent() to make it works for all the cases.
+**  singleTop works with the same task as caller only
+**  ala/xiaoji :  launchMode = singleTop  +  ClearTopFlag 
+
+
+----------singleTask-----------
+---->singleTask / Working in the same application
+If there is no that singleTask Activity instance existed in the system yet, new one would be created and simply placed on top of stack in the same Task.
+
+But if there is an existed one, all of Activities placed above that singleTask Activity would be automatically and cruelly destroyed in the proper way (lifecycle trigged) to make that an Activity we want to appear on top of stack. call [onNewIntent()]
+
+---------------------
+The system creates a new task and instantiates the activity at the root of the new task.  --> this is achieved only with [android:launchMode="singleTask"]
+
+<activity
+    android:name=".SingleTaskActivity"
+    android:label="singleTask launchMode"
+    android:launchMode="singleTask"
+    android:taskAffinity="">
+
+taskAffinity specifies the name of the task 
+
+--------------------
+
+https://stackoverflow.com/questions/21374610/use-of-android-taskaffinity
+ 
+ if you do not set   Intent.FLAG_ACTIVITY_NEW_TASK   -->       the new Activity will be started in the same task, regardless of the value of taskAffinity.
+ if you set   Intent.FLAG_ACTIVITY_NEW_TASK   -->   new Activity shoudl have a different taskAffinity  
+
+conclusion -->  you need BOTH Intent.FLAG_ACTIVITY_NEW_TASK   and   taskAffinity   to start in a new task !!!!
+
+---->singleTask / Collaborate with another application
+
+Once an Intent is sent from another application and there is no any Activity instance created in the system yet, new Task would be created with a newly created Activity placed as a root Activity.
+
+** In case that there is an Activity instance existed in any Task, the whole Task would be moved to top and every single Activity placed above the singleTask Activity will be destroyed with lifecycle.
+
+
+
+--------------------------------------------------------------------
+OverView Screen !
+The overview screen (also referred to as the recents screen, recent task list, or recent apps) is a system-level UI that lists recently accessed activities and tasks
+
+---------------------------------------------------------------------
+https://developer.android.com/guide/components/activities/tasks-and-back-stack.html
+
+--> When the user touches an icon in the app launcher (or a shortcut on the Home screen), that app's task comes to the foreground. If no task exists for the app (the app has not been used recently), then a new task is created and the "main" activity for that app opens as the root activity in the stack.
+
+
