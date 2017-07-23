@@ -318,6 +318,16 @@
 					"url":"backtrack/subset.png",
 					"filename":"subsetDiagram",
 					"type":"png"
+				},
+				{
+					"url":"backtrack/permutations.txt",
+					"filename":"permutations",
+					"type":"txt"
+				},
+				{
+					"url":"backtrack/permutations.png",
+					"filename":"permutationsDiagram",
+					"type":"png"
 				}
 			]
 		},
