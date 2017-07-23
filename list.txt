@@ -328,6 +328,11 @@
 					"url":"backtrack/permutations.png",
 					"filename":"permutationsDiagram",
 					"type":"png"
+				},
+				{
+					"url":"backtrack/combinationSum.txt",
+					"filename":"combinationSum",
+					"type":"txt"
 				}
 			]
 		},
