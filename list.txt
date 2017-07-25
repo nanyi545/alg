@@ -353,6 +353,11 @@
 					"url":"java/leaks.txt",
 					"filename":"leaks",
 					"type":"txt"
+				},
+				{
+					"url":"java/overide_overload.txt",
+					"filename":"overide_overload",
+					"type":"txt"
 				}
 			]
 		},
@@ -363,7 +368,12 @@
 					"url":"android/UseCase.txt",
 					"filename":"MVP_UseCase1",
 					"type":"txt"
-				},			
+				},
+				{
+					"url":"android/arrayMap.txt",
+					"filename":"arrayMap",
+					"type":"txt"
+				},
 				{
 					"url":"android/touchevent.txt",
 					"filename":"touchevent",
