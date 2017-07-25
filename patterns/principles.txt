@@ -1,0 +1,45 @@
+1  ----------> single responsibility principle
+
+ImageLoader: 缓存功能由ImageCache类完成， ImageLoader持有ImageCache的引用
+
+
+2  -----------> open close principle  
+** open to addition ,  close to modification 
+
+ImageLoader需要引入DiskCache / MemoryCache / DoubleCache 
+
+ImageCache 为接口
+public interface ImageCache {
+	public Bitmap get(String url);
+	public void put(String url,Bitmap bmp);
+}
+
+ImageLoader 加入setImageCache(ImageCache cache),用户可以设置自定义的cache（只需符合ImageCache接口）
+
+
+3 -------------> Liskov Substitution 里氏替换 
+
+只要父类能出现，就可以替换为他的子类：所有View的地方都可以用TextView/ImageView
+3于2依依相关，通过里氏替换来实现对扩展的开放。
+
+
+4 -------------> dependency inverrsion principle 
+
+** 高层模块不应该以来底层模块，两者都应该依赖抽象
+** 抽象不应该依赖细节
+** 细节应该依赖抽象
+
+
+5 -------------> Interface sepregation principles
+依赖尽可能小的接口
+
+public static void closeIt(Closable closable) {
+	try{ closable.close();
+	}catch{...
+	}
+}
+
+
+6 -------------> law of demeter (least knowledge principle)
+
+一个类对自己需要耦合或者调用的类知道的最少，它只需要知道抽象，而不需要知道具体的实现。

@@ -425,6 +425,16 @@
 					"type":"html"
 				}
 			]
+		},
+		{
+			"category_name":"patterns",
+			"category_data":[
+				{
+					"url":"patterns/principles.txt",
+					"filename":"principles",
+					"type":"txt"
+				}
+			]
 		}
 	]
 }
