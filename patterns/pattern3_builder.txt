@@ -31,10 +31,33 @@ dialog.setIcon(...);
  -------------------------------------------------------- 
 
 
-
-Common ımplementatıon detaıls
+Common implementatıon detaıls
 
 ** The methods of builder class always return itself.
 ** Make the constructors private so it cannot be instantiated by any other means.
 ** Make the fields finals so that your object becomes immutable after it’s being created.
 ** Do not try to apply this pattern if you do not need it. For instance, consider builder pattern when you have 5 or more fields in your constructors.
+
+
+----------------------- an example ------------------------------
+
+Builder{
+	public Builder setCache(BitmapCache cache){ this.cache=cache;return this;}
+	...
+	public ImageLoaderConfig create(){
+		ImageLoaderConfig config=new ImageLoaderConfig();
+		apply(config);
+		return config;
+	}
+	void apply(ImageLoaderConfig config){
+		config.XX=this.XX;...
+	}
+}
+
+
+ImageLoaderConfig config=new ImageLoaderConfig.Builder(context)
+	.threadPRIORITY(....)
+	.discCacheFileNameGenerator(...)
+	.taskProcessingORDER(...)
+	.build();
+ImageLoader.getInstance().init(config);
