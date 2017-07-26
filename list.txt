@@ -433,6 +433,11 @@
 					"url":"patterns/principles.txt",
 					"filename":"principles",
 					"type":"txt"
+				},
+				{
+					"url":"patterns/pattern3_builder.txt",
+					"filename":"pattern3_builder",
+					"type":"txt"
 				}
 			]
 		}

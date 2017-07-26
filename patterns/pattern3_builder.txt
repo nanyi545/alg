@@ -1,0 +1,40 @@
+
+** 使得使用者在不知道内部细节的情况下，可以更精细的控制对象的创建流程。
+** 将构建复杂对象的过程。和它部件解耦，使得构建过程和部件的表示隔离开来。
+** 适用于：复杂对象构建 
+** typical  :  Builder.setA(...).setB(...).build();
+** AlertDialog  :  
+
+---------------------note here ----------------------------
+
+https://stackoverflow.com/questions/11810345/why-strange-naming-convention-of-alertdialog-builder-instead-of-alertdialogbu
+
+According to the Javadocs, nested classes (and in this case, static nested classes) are generally used for three things:
+
+    Logically grouping classes which will only ever be used together.
+    Increasing encapsulation.
+    Increasing readability and maintainability of code.
+
+ -------------------------------------------------------- 
+
+
+--------------------- why not use setters?------------------------
+AlertDialog dialog=new AlertDialog();
+dialog.setMessage(...);
+dialog.setTitle(...);
+dialog.setIcon(...);
+...
+
+** 第一个问题是我们的stu对象没有一个创建完毕的标识，上面的stu对象我们设置了三个属性，但当别人看到这段代码时，他不确定这个stu对象是只需要这三个属性还是当时作者忘了写完整，除非所有的属性都给set上，别人才能确保你这个对象创建完毕
+** 另一个问题是任何人都可以在我们创建好的基础上继续改变它，也就是继续给它set新的属性或者删除某个已经set的属性，这就会使我们的stu对象具有可变性，这会引起潜在的风险。
+
+ -------------------------------------------------------- 
+
+
+
+Common ımplementatıon detaıls
+
+** The methods of builder class always return itself.
+** Make the constructors private so it cannot be instantiated by any other means.
+** Make the fields finals so that your object becomes immutable after it’s being created.
+** Do not try to apply this pattern if you do not need it. For instance, consider builder pattern when you have 5 or more fields in your constructors.

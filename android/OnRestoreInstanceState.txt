@@ -21,3 +21,9 @@ https://stackoverflow.com/questions/28586443/android-view-onsaveinstancestate-no
 
 (2)-------------->  when not enough resource to keep an activity  
 also call     onSaveInstanceState()   --> onDestroy()     --> onCreate()   ---> onRestoreInstanceState()
+
+
+
+********---------->
+you can imitate case (2)  by using case (1)
+
