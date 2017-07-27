@@ -27,3 +27,8 @@ also call     onSaveInstanceState()   --> onDestroy()     --> onCreate()   ---> 
 ********---------->
 you can imitate case (2)  by using case (1)
 
+
+
+********---------->
+** stuff can be recreated in onCreate(),  like fragments/network data/...
+** only stuff like user input, should be save in onSaveInstanceState()/onRestoreInstanceState()
