@@ -32,3 +32,30 @@ you can imitate case (2)  by using case (1)
 ********---------->
 ** stuff can be recreated in onCreate(),  like fragments/network data/...
 ** only stuff like user input, should be save in onSaveInstanceState()/onRestoreInstanceState()
+
+
+
+
+(3)---------->  After the rotate, onCreate() Fragment is called before onCreate()
+
+After the rotate, onCreate() Fragment is called before onCreate() FragmentActivity
+https://stackoverflow.com/questions/14093438/after-the-rotate-oncreate-fragment-is-called-before-oncreate-fragmentactivi
+------------------------------------------
+ACTIVITY onCreate (pre-super)
+FRAGMENT onAttach()                --->  this restores the fragments
+ACTIVITY onCreate (post-super)
+------------------------------------------
+
+
+https://stackoverflow.com/questions/13305861/fool-proof-way-to-handle-fragment-on-orientation-change
+
+if you do not want to restores the fragments:
+
+in activity: super.onCreate(null);
+
+(4)----------> java.lang.NullPointerException: Attempt to write to field |int android.support.v4.app.Fragment.mNextAnim| on a null object reference
+
+getSupportFragmentManager().beginTransaction().show(thirdHomeFragment).hide(newFinanceFragment).hide(newAccountFragment).commit();
+
+in hide(newFinanceFragment)  , if newFinanceFragment is null ---> java.lang.NullPointerException: Attempt to write to field |int android.support.v4.app.Fragment.mNextAnim| on a null object reference
+
