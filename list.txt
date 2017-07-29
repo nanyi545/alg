@@ -427,6 +427,16 @@
 			]
 		},
 		{
+			"category_name":"framework",
+			"category_data":[
+				{
+					"url":"framework/window_manager.txt",
+					"filename":"window_manager",
+					"type":"txt"
+				}
+			]
+		},
+		{
 			"category_name":"patterns",
 			"category_data":[
 				{

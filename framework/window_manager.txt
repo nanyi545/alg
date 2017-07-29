@@ -1,0 +1,221 @@
+WindowManager的实现： WindowManagerImpl 
+
+
+1 --------------------------------> ViewManager 
+
+/**
+ The interface that apps use to talk to the window manager.
+Use Context.getSystemService(Context.WINDOW_SERVICE) to get one of these.
+Each window manager instance is bound to a particular   ***[Display]***
+**/
+public interface WindowManager extends ViewManager {
+
+public interface ViewManager
+{
+    /**
+     * Assign the passed LayoutParams to the passed View and add the view to the window.
+     * <p>Throws {@link android.view.WindowManager.BadTokenException} for certain programming
+     * errors, such as adding a second view to a window without removing the first view.
+     * <p>Throws {@link android.view.WindowManager.InvalidDisplayException} if the window is on a
+     * secondary {@link Display} and the specified display can't be found
+     * (see {@link android.app.Presentation}).
+     * @param view The view to be added to this window.
+     * @param params The LayoutParams to assign to view.
+     */
+    public void addView(View view, ViewGroup.LayoutParams params);
+    public void updateViewLayout(View view, ViewGroup.LayoutParams params);
+    public void removeView(View view);
+}
+
+
+
+2 --------------------------------> WindowManagerImpl 
+
+ public final class WindowManagerImpl implements WindowManager {
+
+     private final WindowManagerGlobal mGlobal = WindowManagerGlobal.getInstance();
+     private final Display mDisplay;
+     private final Window mParentWindow;
+     private IBinder mDefaultToken;
+
+     public WindowManagerImpl(Display display) {
+         this(display, null);
+     }
+
+     private WindowManagerImpl(Display display, Window parentWindow) {
+         mDisplay = display;
+         mParentWindow = parentWindow;
+     }
+
+     @Override
+     public void addView(@NonNull View view, @NonNull ViewGroup.LayoutParams params) {
+         applyDefaultToken(params);
+         mGlobal.addView(view, params, mDisplay, mParentWindow);
+     }
+
+
+    @Override
+    public void removeView(View view) {
+        mGlobal.removeView(view, false);
+    }
+
+
+ }
+
+
+3 --------------------------------> WindowManagerGlobal 
+
+WindowManagerImpl.addView()  is delegated to WindowManagerGlobal.addView()
+
+
+
+public final class WindowManagerGlobal {
+
+    private final ArrayList<View> mViews = new ArrayList<View>(); 
+    private final ArrayList<ViewRootImpl> mRoots = new ArrayList<ViewRootImpl>();
+    private final ArrayList<WindowManager.LayoutParams> mParams = new ArrayList<WindowManager.LayoutParams>();
+
+public void addView(View view, ViewGroup.LayoutParams params,Display display, Window parentWindow) {
+            ....
+            root = new ViewRootImpl(view.getContext(), display);
+            view.setLayoutParams(wparams);
+            mViews.add(view);
+            mRoots.add(root);
+            mParams.add(wparams);
+
+
+mViews: 所有Window对应的View
+mRoots: 所有Window对应的ViewRootImpl
+mParams:所有Window对应的布局参数 
+
+
+这个过程创建一个ViewRootImpl,并将之前创建的DecoView作为参数闯入,以后DecoView的事件都由ViewRootImpl来管理了,比如DecoView上添加View,删除View。ViewRootImpl实现了ViewParent这个接口,这个接口最常见的一个方法是requestLayout(）。
+
+ViewRootImpl是个ViewParent，在DecoView添加的View时,就会将View中的ViewParent设为DecoView所在的ViewRootImpl,View的ViewParent相同时,理解为这些View在一个View链上。所以每当调用View的requestLayout(）时,其实是调用到ViewRootImpl，ViewRootImpl会控制整个事件的流程。可以看出一个ViewRootImpl对添加到DecoView的所有View进行事件管理。
+
+
+
+
+4 -----------------------------> ViewRootImpl
+
+/**
+The top of a view hierarchy, implementing the needed protocol between View and the WindowManager. This is for the most part an internal implementation detail of WindowManagerGlobal. 
+**/
+
+public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks, HardwareRenderer.HardwareDrawCallbacks {
+
+
+public ViewRootImpl(Context context, Display display) {
+         mContext = context;
+         //  获取session，来与WMS建立连接
+         mWindowSession = WindowManagerGlobal.getWindowSession();
+         mDisplay = display;
+         ....
+         // 保存当前线程，非UI线程更新UI会抛出异常，如何实现？  ViewRootImpl构造函数中记录UI线程
+         mThread = Thread.currentThread();
+}
+
+
+here :  mWindowSession = WindowManagerGlobal.getWindowSession();   returns a proxy of remote WMS service 
+
+***[ typical way to obtain a proxy ]***
+sWindowManagerService = IWindowManager.Stub.asInterface(ServiceManager.getService("window"));
+
+
+之后就可以远程调用WMS， ViewRootImpl的setView方法可以向WMS发起显示Dialog（或者Activity中的DecorView）请求。
+public void setView(View view, WindowManager.LayoutParams attrs, View panelParentView) {
+         synchronized (this) {
+                   res = mWindowSession.addToDisplay(...)
+         }
+}
+
+
+5------------------------------> WindowManager/WMS manages the Z-order of views / display the views by z-ordering ..
+
+WindowManager is the proxy / WMS is the service that does the actual work / WindowManager calls WMS through IPC 
+
+
+
+6 -----------------------------> public abstract class Window
+  * <p>The only existing implementation of this abstract class is
+  * android.policy.PhoneWindow
+  * 每一个Window都对应一个View和一个ViewRootImpl, Window和View通过ViewRootImpl来建立联系
+  * View不能单独存在，有view的地方必须有window。 Activity / Dialog / Toast 都对应着一个Window 
+
+6.1 ---------> Activity的Window创建
+
+
+Activity的attach方法：
+final void attach(Context context, ActivityThread aThread, Instrumentation instr, IBinder token,
+            Application application, Intent intent, ActivityInfo info, CharSequence title, 
+            Activity parent, String id, NonConfigurationInstances lastNonConfigurationInstances,
+            Configuration config) {
+...
+        mWindow = PolicyManager.makeNewWindow(this);
+//  Activity implements Window.Callback  
+//      ----> has method : public boolean dispatchKeyEvent(KeyEvent event);   and more... 
+//                         public void onDetachedFromWindow();
+//                         public void onAttachedToWindow();  
+        mWindow.setCallback(this);
+
+Activity里新建一个PhoneWindow对象。在Android中,Window是个抽象的概念,Android中Window的具体实现类是PhoneWindow,Activity和Dialog中的Window对象都是PhoneWindow。
+
+同时得到一个WindowManager对象,WindowManager是一个抽象类,这个WindowManager的具体实现实在WindowManagerImpl中(类比Context和ContextImpl)
+每个Activity会有一个WindowManager对象,这个mWindowManager就是和WindowManagerService(WMS)进行通信,也是WMS识别View具体属于那个Activity的关键,创建时传入IBinder 类型的mToken。
+
+mWindow.setWindowManager(...,mToken, ...,...)
+这个Activity的mToken,这个mToken是一个IBinder,WMS就是通过这个IBinder来管理Activity里的View。
+***[mToken由attach方法传入,mToken如何生成????]***
+
+
+   
+Activity的setContentView方法：交给window的setContentView()
+    public void setContentView(int layoutResID) {
+        getWindow().setContentView(layoutResID);  // 创建DecorView
+        initActionBar();
+    }
+
+
+----------------------------
+ActivityThread.performResumeActivity中,再调用r.activity.performResume()，调用r.activity.makeVisible,将DecorView添加到当前的Window上。
+
+void makeVisible() {    
+    if (!mWindowAdded) {        
+        ViewManager wm = getWindowManager();        
+        wm.addView(mDecor, getWindow().getAttributes());        
+        mWindowAdded = true;    
+    }    
+    mDecor.setVisibility(View.VISIBLE);
+}
+
+WindowManager的addView的具体实现在WindowManagerImpl中,而WindowManagerImpl的addView又会调用WindowManagerGlobal.addView。
+-----------------------------
+
+
+
+7 ---->DecorView inner class of PhoneWindow
+com.android.internal.policy.impl.PhoneWindow
+
+private final class DecorView extends FrameLayout implements RootViewSurfaceTaker 
+
+http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2013/0322/1054.html
+DecorView
+|
+|__LinearLayout
+      |__FrameLayout --> title area
+      |__FrameLayout --> content area
+
+
+
+--->   android.view.Display
+
+Provides information about the size and density of a logical display. 
+
+
+---------------------
+links
+http://www.jianshu.com/p/c223b993b1ec
+设计模式 第三章
+http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2013/0322/1054.html
+---------------------
+
