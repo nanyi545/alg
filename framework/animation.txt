@@ -1,5 +1,5 @@
 pre-3.0 :  View animation  --> 简单的缩放，平移，旋转，透明度动画。
-平移动画不改变View的最终位置
+平移动画不改变View的最终位置(点击原来的位置会触发onclick等问题)
 
 what is better : 属性动画
 
@@ -70,6 +70,6 @@ here: currentProgress --> determines the progress in onDraw() method
 
 
 
-TODO  more on book ch7 strategy pattern ...
+TODO  more details on book ch7 strategy pattern ...
 
 

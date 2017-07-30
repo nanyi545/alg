@@ -1,0 +1,69 @@
+---------------------------
+left / right / top / bottom  --> 相对于parent
+
+width = right -left
+height= bottom -top 
+
+
+---------------------------
+since Android 3.0   ...
+
+x = left + translationX
+y = top  + translationY 
+
+
+----------------------------
+touch slope : distance resolution 
+
+e.g.   scroll distance smaller than this could be ignored...  
+
+ViewConfiguration.get(getContext()).getScaledTouchSlop();
+
+
+----------------------------
+velocity tracker
+
+VelocityTracker tracker=VelocityTracker.obtain();  // get from pool 
+tracker.addMovement(event);
+tracker.computeCurrentVelocity(1000);
+tracker.getXVelocity();
+
+onDetachFromWindow()...
+tracker.clear();
+tracker.recycle();
+
+
+----------------------------
+
+view滑动的三种方法：
+
+1 scrollTo/scrollBy
+2 属性动画
+3 改变布局参数 
+
+----------------------------
+
+
+
+smooth scroll  
+
+method  1---------> use scroller
+
+
+animateScroller.startScroll(0, 0, 10000, 0, 500);
+
+    @Override
+    public void computeScroll() {
+        if (animateScroller.computeScrollOffset()){
+            currentProgress=animateScroller.getCurrX()/100f;
+            postInvalidate();
+        }
+    }
+
+
+method  2---------> use animation 
+
+ObjectAnimaor.ofFloat(myObject,"translationY",-myObject.getHeight()).start();
+
+
+
