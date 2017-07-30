@@ -433,6 +433,11 @@
 					"url":"framework/window_manager.txt",
 					"filename":"window_manager",
 					"type":"txt"
+				},
+				{
+					"url":"framework/animation.txt",
+					"filename":"animation",
+					"type":"txt"
 				}
 			]
 		},
@@ -447,6 +452,21 @@
 				{
 					"url":"patterns/pattern3_builder.txt",
 					"filename":"pattern3_builder",
+					"type":"txt"
+				},
+				{
+					"url":"patterns/pattern4_prototype.txt",
+					"filename":"pattern4_prototype",
+					"type":"txt"
+				},
+				{
+					"url":"patterns/pattern5_factory.txt",
+					"filename":"pattern5_factory",
+					"type":"txt"
+				},
+				{
+					"url":"patterns/pattern7_strategy.txt",
+					"filename":"pattern7_strategy",
 					"type":"txt"
 				}
 			]
