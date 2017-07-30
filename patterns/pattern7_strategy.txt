@@ -1,0 +1,20 @@
+book ch7
+
+** example : we need a sort method that can have different implementations (quick sort / merge sort / heap sort)
+** if-else / switch-case should be avoided 
+** example 计算路费（公交车/打车/地铁各自计费方式不同）
+
+public interface CalculatorStrategy{
+	int getPrice(int distanceInKm);
+}
+
+BusStrategy implements CalculatorStrategy{...}
+
+PriceCalculator {
+	final CalculatorStrategy strategy;
+	PriceCalculator (CalculatorStrategy strategy){ this.strategy=strategy;}
+	int getPrice(int d){return strategy.getPrice(d);}
+}
+
+
+**  strategy pattern in android source:   TimeInterpolator 

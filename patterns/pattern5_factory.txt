@@ -1,0 +1,22 @@
+
+factory example
+https://www.quora.com/What-is-the-difference-between-the-factory-and-prototype-design-pattern
+
+Factory design pattern is used when we have a super class with multiple sub-classes and based on input, we need to return one of the sub-class. This pattern take out the responsibility of instantiation of a class from client program to the factory class.
+
+
+public class MyComputerFactory { 
+   public static MyComputer getComputer(String type, String ram, String hdd, String cpu){
+      if("MyPersonalComputer".equalsIgnoreCase(type)) 
+         return new MyPersonalComputer(ram, hdd, cpu);
+      else if("MyServer".equalsIgnoreCase(type)) 
+         return new MyServer(ram, hdd, cpu);
+      return null;
+   }
+}
+
+**   this seems not to comply with OCP (open close principle)  --> are there better examples in android ?? 
+
+
+*********
+HashSet, ArrayList --> iterator() method is a factory method 

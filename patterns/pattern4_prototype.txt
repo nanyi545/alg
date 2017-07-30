@@ -1,0 +1,11 @@
+http://www.tutorialspoint.com/design_pattern/prototype_pattern.htm
+
+This pattern is used when creation of object directly is costly. For example, an object is to be created after a costly database operation. We can cache the object, returns its clone on next request and update the database as and when needed thus reducing database calls.
+
+(costly  -->  It could be in terms of memory or computation for example)
+
+
+book CH4 
+** 类初始化需要消耗非常多的资源（数据，硬件）资源。
+** new对象需要非常繁琐的数据准备或访问权限。
+** 保护性拷贝:当你不希望一个对象被修改时（除了access level修饰外），可以返回这个对象的copy

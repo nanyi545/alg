@@ -1,0 +1,75 @@
+pre-3.0 :  View animation  --> 简单的缩放，平移，旋转，透明度动画。
+平移动画不改变View的最终位置
+
+what is better : 属性动画
+
+
+example 1 : animate translationY
+ObjectAnimaor.ofFloat(myObject,"translationY",-myObject.getHeight()).start();
+
+
+
+example 2 : 
+
+        final ObjectAnimator animator = ObjectAnimator.ofInt(tv3, "textColor",getResources().getColor(R.color.Red200), getResources().getColor(R.color.Red600));
+        final ObjectAnimator animator1 = ObjectAnimator.ofInt(iv3, "backgroundColor",getResources().getColor(R.color.Red200), getResources().getColor(R.color.Red600));
+
+        animator.setDuration(1000L);
+        animator.setEvaluator(new ArgbEvaluator());
+        animator.setInterpolator(new DecelerateInterpolator(2));
+
+        animator1.setDuration(1000L);
+        animator1.setEvaluator(new ArgbEvaluator());
+        animator1.setInterpolator(new DecelerateInterpolator(2));
+
+        iv3_color.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                animator.start();
+//                animator1.start();
+                AnimatorSet animation = new AnimatorSet();
+//                animation.playTogether(animator, animator1);
+                animation.playSequentially(animator, animator1);
+                animation.start();
+            }
+        });
+
+
+***  只能animate view的属性， 自定义view的话，需要先定义view的属性
+
+
+
+
+********  another way to animate ---> use scroller
+
+here: currentProgress --> determines the progress in onDraw() method
+
+    /**
+     * @param animated  need animation
+     */
+    private void showPieChart(boolean animated) {
+        if (dataHasBeenSet) {
+            if (animated) {
+                animateScroller.startScroll(0, 0, 10000, 0, 500);
+            } else {
+                currentProgress = 100;
+            }
+            invalidate();
+        }
+    }
+
+
+
+    @Override
+    public void computeScroll() {
+        if (animateScroller.computeScrollOffset()){
+            currentProgress=animateScroller.getCurrX()/100f;
+            postInvalidate();
+        }
+    }
+
+
+
+TODO  more on book ch7 strategy pattern ...
+
+
