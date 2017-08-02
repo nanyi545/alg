@@ -1,0 +1,30 @@
+book ch8
+
+** 状态模式和策略模式的结构几乎完全一样，但是目的不同。
+** 策略模式-->彼此独立，可相互替换    状态模式-->不可替换
+** 代码中包含大量与对象状态有关的条件语句(if-else/switch-case)  --> 考虑利用多态来除去条件判断语句
+
+http://ima.udg.edu/~sellares/EINF-ES1/StateToni.pdf
+
+The State Pattern allows an object to alter its behavior when its internal state changes. The object will appear to change its class.
+
+
+
+
+
+public interface State{
+	action1();
+	action2();
+} 
+
+
+State1 implements State { ... }
+State2 implements State { ... }
+
+
+StateManager  {
+
+	State state;
+	
+	
+}

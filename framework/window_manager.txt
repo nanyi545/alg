@@ -7,6 +7,10 @@ WindowManager的实现： WindowManagerImpl
  The interface that apps use to talk to the window manager.
 Use Context.getSystemService(Context.WINDOW_SERVICE) to get one of these.
 Each window manager instance is bound to a particular   ***[Display]***
+
+无法直接访问Window，对Window的访问都是通过WindowManager
+Window：抽象功能的集合
+
 **/
 public interface WindowManager extends ViewManager {
 
@@ -100,6 +104,9 @@ ViewRootImpl是个ViewParent，在DecoView添加的View时,就会将View中的Vi
 
 /**
 The top of a view hierarchy, implementing the needed protocol between View and the WindowManager. This is for the most part an internal implementation detail of WindowManagerGlobal. 
+
+view绘制过程由ViewRootImpl完成(scheduleTraversal())
+
 **/
 
 public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks, HardwareRenderer.HardwareDrawCallbacks {
@@ -142,6 +149,7 @@ WindowManager is the proxy / WMS is the service that does the actual work / Wind
   * 每一个Window都对应一个View和一个ViewRootImpl, Window和View通过ViewRootImpl来建立联系
   * View不能单独存在，有view的地方必须有window。 Activity / Dialog / Toast 都对应着一个Window 
 
+
 6.1 ---------> Activity的Window创建
 
 
@@ -168,12 +176,18 @@ mWindow.setWindowManager(...,mToken, ...,...)
 ***[mToken由attach方法传入,mToken如何生成????]***
 
 
-   
+----------------------------
 Activity的setContentView方法：交给window的setContentView()
     public void setContentView(int layoutResID) {
         getWindow().setContentView(layoutResID);  // 创建DecorView
         initActionBar();
     }
+
+----------------------------
+window的setContentView:
+创建DecorView，然后把layoutResID添加到DecorView的mContentParent上
+
+
 
 
 ----------------------------
