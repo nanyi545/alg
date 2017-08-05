@@ -1,0 +1,51 @@
+book ch9 责任链模式
+
+** 层层处理：
+** if not handled, pass to next handler 
+
+
+
+**  example in android --> handle touch event 
+dispatchTouchEvent ()
+onIntercept()
+
+
+
+
+**  example in android --> CrashHandler
+
+CrashHandler implements Thread.UncaughtExceptionHandler 
+
+Thread.setDefaultUncaughtExceptionHandler()
+
+/**
+
+you need to pass the error to default handler to terminate the app ...
+
+**/
+
+public class CrashHandler implements Thread.UncaughtExceptionHandler {
+
+    private Thread.UncaughtExceptionHandler mDefaultHandler;
+
+    public CrashHandler() {
+        this.mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
+    }
+
+    private boolean handlerException(Throwable e){
+        Log.i("aaa"," CrashHandler :"+Log.getStackTraceString(e));
+        return true;
+    }
+
+    @Override
+    public void uncaughtException(Thread t, Throwable e) {
+        if ( !handlerException(e) && (mDefaultHandler!=null)){
+            mDefaultHandler.uncaughtException(t,e); 
+        }
+    }
+
+}
+
+
+
+

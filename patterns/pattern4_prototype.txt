@@ -9,3 +9,21 @@ book CH4
 ** 类初始化需要消耗非常多的资源（数据，硬件）资源。
 ** new对象需要非常繁琐的数据准备或访问权限。
 ** 保护性拷贝:当你不希望一个对象被修改时（除了access level修饰外），可以返回这个对象的copy
+
+
+
+------------------------
+clone 
+
+Object.clone()
+
+call native: 
+private native Object internalClone();
+
+
+
+
+Intent.clone(){
+ return new Intent(this);
+}
+

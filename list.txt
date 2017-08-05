@@ -455,6 +455,11 @@
 					"type":"txt"
 				},
 				{
+					"url":"patterns/mvc_mvp.txt",
+					"filename":"mvc_mvp",
+					"type":"txt"
+				},
+				{
 					"url":"patterns/pattern3_builder.txt",
 					"filename":"pattern3_builder",
 					"type":"txt"
@@ -472,6 +477,16 @@
 				{
 					"url":"patterns/pattern7_strategy.txt",
 					"filename":"pattern7_strategy",
+					"type":"txt"
+				},
+				{
+					"url":"patterns/pattern8_state.txt",
+					"filename":"pattern8_state",
+					"type":"txt"
+				},
+				{
+					"url":"patterns/pattern9_chain.txt",
+					"filename":"pattern9_chain",
 					"type":"txt"
 				}
 			]
