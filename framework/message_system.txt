@@ -1,0 +1,87 @@
+
+----------Handler-------------
+
+
+1 ---> in constructor 
+mLooper = Looper.myLooper();
+mQueue = mLooper.mQueue;
+
+
+2 --->
+Handler post runnable --> 使用message来传递runnable
+
+    private static Message getPostMessage(Runnable r) {
+        Message m = Message.obtain(); // 享元模式
+        m.callback = r;
+        return m;
+    }
+
+最终调用 MessageQueue.enqueueMessage(msg, uptimeMillis)
+
+
+
+-----------Looper-------------
+
+//  Looper is managed by a threadLocal
+static final ThreadLocal<Looper> sThreadLocal = new ThreadLocal<Looper>();
+
+//  Looper manages a message queue 
+final MessageQueue mQueue;
+
+
+--->  myLooper
+    public static Looper myLooper() {
+        return sThreadLocal.get();
+    }
+
+
+--->
+
+    /**
+     * Run the message queue in this thread. Be sure to call
+     * {@link #quit()} to end the loop.
+       建立死循环，从队列中逐个除去消息来处理
+     */ 
+    public static void loop()
+
+
+--->
+    private static void prepare(boolean quitAllowed) {
+        if (sThreadLocal.get() != null) {
+            throw new RuntimeException("Only one Looper may be created per thread");
+        }
+        sThreadLocal.set(new Looper(quitAllowed));
+    }
+
+
+
+
+----------MessageQueue-------------
+
+call native code to manage a message queue 
+
+
+
+-------------------------------------
+----->  this will cause error !!!!!
+
+new Thread({
+run(){  
+	Handler handler=new Handler();  //  can't create handler,on a thread that has no Looper. 
+}
+}).start();
+
+
+----->  this is OK !!!!!
+
+new Thread({
+run(){  
+	Looper.prepare();  
+	Handler handler=new Handler();  
+	Looper.loop();   
+}
+}).start();
+
+
+
+

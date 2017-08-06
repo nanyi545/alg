@@ -1,0 +1,21 @@
+book ch22 享元模式
+
+** 需要很多相似的对象
+** 避免重复创建/GC，使用缓冲池
+
+
+example in android:
+
+--------> Message.obtain();
+--------> String 常量池
+
+String s="abc";
+String s1="abc";
+String s2=new String("abc");
+String s3=new String("abc");
+
+s==s1   --> true
+s2==s1  --> false
+s2==s3  --> false
+
+
