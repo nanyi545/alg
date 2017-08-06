@@ -103,6 +103,7 @@ ViewRootImpl是个ViewParent，在DecoView添加的View时,就会将View中的Vi
 4 -----------------------------> ViewRootImpl
 
 /**
+
 The top of a view hierarchy, implementing the needed protocol between View and the WindowManager. This is for the most part an internal implementation detail of WindowManagerGlobal. 
 
 view绘制过程由ViewRootImpl完成(scheduleTraversal())
@@ -185,8 +186,10 @@ Activity的setContentView方法：交给window的setContentView()
 
 ----------------------------
 window的setContentView:
-创建DecorView，然后把layoutResID添加到DecorView的mContentParent上
 
+这个过程创建一个ViewRootImpl,并将之前创建的DecoView作为参数闯入,以后DecoView的事件都由ViewRootImpl来管理了,比如DecoView上添加View,删除View。ViewRootImpl实现了ViewParent这个接口,这个接口最常见的一个方法是requestLayout(）。
+
+创建DecorView，然后把layoutResID添加到DecorView的mContentParent上
 
 
 
@@ -204,6 +207,19 @@ void makeVisible() {
 
 WindowManager的addView的具体实现在WindowManagerImpl中,而WindowManagerImpl的addView又会调用WindowManagerGlobal.addView。
 -----------------------------
+
+
+
+6.2 ---------> Dialog的Window创建
+
+step 1 : mWindow = PolicyManager.makeNewWindow(this); // 和activity相同
+step 2 : mWindow.setContentView(id);      // 和activity相同
+step 3 : Dialog 的show方法： 通过WindowManager的addView方法 ( WindowManagerGlobal ) 添加到window中 
+
+** note : Dialog need a activity context 
+application context --> will throw exception 
+
+
 
 
 
@@ -226,9 +242,51 @@ DecorView
 Provides information about the size and density of a logical display. 
 
 
+
+
 ---------------------
 links
 http://www.jianshu.com/p/c223b993b1ec
+
+--------Q1------------
+在Activity里调用 WindowManager.LayoutParams wl = new WindowManager.LayoutParams(); getWindowManager().addView(mView,wl)
+和
+LayoutParams wmParams =...
+addContentView(mView,wmParams); //activity里的方法
+这两种方式背后的实现是怎样的,有什么区别?
+
+
+ANS---> 第一种情况会调用到WindowManagerGlobal.addView,这时会创建一个新的ViewRootImpl,和原来的DecoView不在一条View链上,所以它们之间的任何一个调用requestLayout(）不会影响到另一个。
+
+而addContentView(mView,wmParams)是直接将mView添加到DecoView中,会使ViewRootImpl链下的所有View重绘。
+
+activity.addContentView()
+-->mwindow.addContentView()
+----> com.android.internal.policy.impl.PhoneWindow 中 mContentParent.addView(view, params);  //  viewGroup.addView( ... )
+
+
+--------Q2------------
+Dialog和PopupWindow的区别在哪里?为什么Dialog传入application的Context会报错?
+
+
+--> Dialog在创建时会新建一个PhoneWindow,同时也会使用DecoView作为这个PhoneWindow的根View,相当于走了一遍Activity里创建PhoneWindow和DecoView的流程,而调用Dialog的show方法时,类似于ActivityThread.performResumeActivity,将DecoView添加到Window,同时创建管理DecoView链的RootViewImpl来管理DecoView。
+--> PopupWindow就和第一个问题中 getWindowManager().addView(mView,wl)类似了,只是创建一条新的View链和ViewRootImpl,并没有创建新的Window。
+
+
+--------Q3------------
+ViewRootImpl是什么,一个Activity有多少个ViewRootImpl对象?
+
+ViewRootImpl是实际管理Window中所以View的类,每个Activity中ViewRootImpl数量取决于调用mWindowManager.addView的调用次数。
+
+
+--------Q4------------
+该怎样理解Window?
+承担部分功能，而不是都放在activity里面
+
+
+
+
+
 设计模式 第三章
 http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2013/0322/1054.html
 ---------------------
