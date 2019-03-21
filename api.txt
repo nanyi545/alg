@@ -1,1 +1,1 @@
-{"data":"aaa","code":"1"}
+{"status":1,"msg":"success","error_code":"","data":{"data":"aaa","code":"xxx"},"response_time":1553151461}
